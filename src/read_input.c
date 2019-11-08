@@ -20,23 +20,35 @@ int get_ants(char *str)
 		return (result);
 }
 /*
-int get_room(s_map data)
+int get_room(t_map data)
 {
 
 }
 */
 
-int get_data(s_map *data)
+int get_data(t_data *data)
 {
 	char *str;
 	int ret;
+	int mode;
 
 	str = NULL;
+	ret = 1;
+	mode = 0;
 	while (get_next_line(0, &str) > 0)
 	{
-		printf("%s\n", str);
-		free(str);
-		str = NULL;
+		if (str[0] == '#')
+		{
+			free(str);
+			str = NULL;
+			continue ;
+		}
+		else if (data->ants == -1 && (data->ants = get_ants(str)) < 0)
+		{
+//			error()
+			exit(1);
+		}
+		else if ()
 	}
 	return (0);
 }

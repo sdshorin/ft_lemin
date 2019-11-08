@@ -15,22 +15,28 @@
 #include <stdio.h>
 
 
-
-
-typedef struct	t_map
+typedef struct	s_room
 {
-	int 		ants;
+	char			*name; // room name
+	int 			num; // room number
+	struct s_room	*next_num;
+	int 			n_links; // amount of links
+	struct s_room	**links; // links
+}				t_room;
 
-	int 		q_rooms;
-	char 		**n_rooms;
-	char 		*links;
-	int 		**tab;
+typedef struct	s_data
+{
+	int 		ants; // amount of ants
 
-	int 		*path;
+	int 		q_rooms; // amount of rooms
+	t_room 		*start;
+	t_room		*end;
 
-}				s_map;
+	int 		*path; // ?
 
-int get_ants(char *str);
-int get_data(s_map *data);
+}				t_data;
+
+int				get_ants(char *str);
+int 			get_data(t_data *data);
 
 #endif

@@ -68,6 +68,13 @@ int			get_next_line(const int fd, char **line)
 
 	if (fd < 0 || fd > 12000 || read(fd, NULL, 0) < 0)
 		return (-1);
+	/*
+	if (*line != NULL)
+	{
+		free(line);
+		line = NULL;
+	}
+	*/
 	if (tab[0] != NULL && ft_strchr(tab[0], '\n') != NULL)
 		return (get_line(tab, line, 0));
 	while ((red = read(fd, buff, BUFF_SIZE)) > 0)
