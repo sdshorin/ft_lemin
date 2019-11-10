@@ -59,22 +59,17 @@ static int	read_from_buff(char *buff, char **line, char **tab, const int fd)
 	return (-2);
 }
 
-int			get_next_line(const int fd, char **line)
+int			get_next_line(const int fd, char **line, int err)
 {
 	char		buff[BUFF_SIZE + 1];
 	static char	*tab[1];
 	int			red;
 	int			state;
 
+	if (err == -1)
+		handle_errors(tab);
 	if (fd < 0 || fd > 12000 || read(fd, NULL, 0) < 0)
 		return (-1);
-	/*
-	if (*line != NULL)
-	{
-		free(line);
-		line = NULL;
-	}
-	*/
 	if (tab[0] != NULL && ft_strchr(tab[0], '\n') != NULL)
 		return (get_line(tab, line, 0));
 	while ((red = read(fd, buff, BUFF_SIZE)) > 0)
