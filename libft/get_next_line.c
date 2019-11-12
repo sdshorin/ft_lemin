@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	handle_errors(char **tab)
+static int	del_tab(char **tab)
 {
 	if (tab != NULL)
 		if (*tab != NULL)
@@ -29,12 +29,12 @@ static int	get_line(char **tab, char **line, int fd)
 		i++;
 	*line = ft_strsub(tab[fd], 0, i);
 	if (*line == NULL)
-		handle_errors(tab);
+		return (del_tab(tab));
 	if (tab[fd][i] != '\0')
 		tab[fd] = ft_strsubfree(&(tab[fd]), i + 1,
 			ft_strlen(tab[fd]) - i - 1);
 	if (tab[fd] == NULL)
-		handle_errors(tab);
+		return (-1);
 	if (*(tab[fd]) == '\0')
 		ft_strdel(&(tab[fd]));
 	return (1);
@@ -45,7 +45,7 @@ static int	read_from_buff(char *buff, char **line, char **tab, const int fd)
 	if (tab[fd] == NULL)
 	{
 		tab[fd] = ft_strdup((const char *)buff);
-		if (tab[fd] == NULL)
+		if (!tab[fd])
 			return (-1);
 	}
 	else
@@ -67,7 +67,7 @@ int			get_next_line(const int fd, char **line, int err)
 	int			state;
 
 	if (err == -1)
-		handle_errors(tab);
+		return (del_tab(tab));
 	if (fd < 0 || fd > 12000 || read(fd, NULL, 0) < 0)
 		return (-1);
 	if (tab[0] != NULL && ft_strchr(tab[0], '\n') != NULL)

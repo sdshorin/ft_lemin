@@ -23,7 +23,7 @@ SOURCES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr
     ft_isthis.c ft_strsplit.c ft_itoa.c ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c \
    ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstdel.c ft_lstdelone.c ft_lstadd.c \
    ft_lstiter.c ft_lstmap.c ft_strjoinfree.c ft_lltoa.c ft_ulltoa.c ft_ulltoa_base.c ft_strjoinfree2.c ft_putnstr.c \
-   ft_strtol.c ft_strnchr.c ft_strsubfree.c get_next_line.c ft_strchr_bool.c ft_strchr_pos.c
+   ft_strtol.c ft_strnchr.c ft_strsubfree.c get_next_line.c ft_strchr_pos.c
 OBJECTS = $(SOURCES:.c=.o)
 INCLUDES = ./
 HEADERS = libft.h

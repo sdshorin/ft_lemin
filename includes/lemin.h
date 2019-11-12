@@ -10,6 +10,13 @@
 # include <string.h>
 # include "libft.h"
 
+typedef struct	s_input
+{
+	//This struct needed for showing input in the results of program
+	char 			*str;
+	struct s_input	*next;
+}				t_input;
+
 typedef struct	s_room
 {
 	char			*name; // room name
@@ -17,6 +24,10 @@ typedef struct	s_room
 	int 			x;
 	int 			y;
 
+//that shitty part about that we have to print comments to stdout
+//	int 			comments_count;
+//	char			**comment;
+//
 	struct s_room	*next_room; //temp
 
 	int 			level; // distance from the start
@@ -38,7 +49,13 @@ typedef struct	s_data
 
 	int 		*path; // ?
 
+	t_input		*input_head;
+	size_t		input_strings;
+	t_input		*input_tail;
+
 }				t_data;
+
+t_input			*create_input_struct(char *str, int number);
 
 t_data 			*get_data(t_data *data);
 

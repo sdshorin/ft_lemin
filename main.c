@@ -16,6 +16,9 @@ t_data	*create_data_struct(void)
 	data->end = NULL;
 	data->path = NULL; // ?
 	data->first = NULL;
+	data->input_head = NULL;
+	data->input_tail = NULL;
+	data->input_strings = 0;
 	return (data);
 }
 #pragma clang diagnostic pop
@@ -72,7 +75,6 @@ t_room	*create_room(char *str, t_data *data)
 }
 
 
-
 #include <stdio.h>
 
 
@@ -80,27 +82,53 @@ t_room	*create_room(char *str, t_data *data)
 void	display_data(t_data *data)
 {
 	int i = 0;
+	int j = 0;
+	t_room *room;
 
-	printf("Ants: %d \n", data->ants);
-	printf("start room: %s \n", data->start->name);
-	printf("Start node connections: \n");
-	while (i < data->start->n_links)
+	printf("Ants: %d\n", data->ants);
+	room = data->first;
+	while (room != NULL)
 	{
-		printf("  Name: %s \n", data->start->links[i]->name);
-		i++;
+		if (data->start == room)
+			printf("##start\n");
+		else if (data->end == room)
+			printf("##end\n");
+		printf("Room: %s\n", room->name);
+		printf("It's links:\n");
+		while (j < room->n_links)
+		{
+			printf(" Link #%d name: %s\n", j, room->links[j]->name);
+			j++;
+		}
+		printf("\n");
+		j = 0;
+		room = room->next_room;
 	}
+
+//	printf("start room: %s \n", data->start->name);
+//	printf("Start node connections: \n");
+//	while (i < data->start->n_links)
+//	{
+//		printf("  Name: %s \n", data->start->links[i]->name);
+//		i++;
+//	}
 //	printf("connected with :%s", data->start->links[0]->name);
-	printf("end room: %s", data->end->name);
+//	printf("end room: %s", data->end->name);
 
 }
 
 int main(void)
 {
 	t_data	*data;
-	t_room *last;
+	t_room	*last;
+	t_input	*input;
 
 	data = create_data_struct();
-	get_data(data);
+	data->input_head = create_input_list();
+	get_data(data, input);
+
+	if (data->start == data->end)
+		ft_putendl_fd("Error: start == end!", 2);
 
 	display_data(data);
 

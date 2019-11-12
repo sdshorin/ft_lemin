@@ -97,7 +97,6 @@ char			*ft_ulltoa_base(unsigned long long value, int base, char high);
 void			ft_putnstr(char const *s, int len);
 long long int	ft_strtol(const char *str);
 int				ft_numlen(const char *str);
-char 			ft_strchr_bool(const char *s, int c);
 int				ft_strchr_pos(const char *str, int c);
 int				get_next_line(const int fd, char **line, int err);
 
