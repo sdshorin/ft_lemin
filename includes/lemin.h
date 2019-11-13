@@ -24,10 +24,6 @@ typedef struct	s_room
 	int 			x;
 	int 			y;
 
-//that shitty part about that we have to print comments to stdout
-//	int 			comments_count;
-//	char			**comment;
-//
 	struct s_room	*next_room; //temp
 
 	int 			level; // distance from the start
@@ -55,13 +51,29 @@ typedef struct	s_data
 
 }				t_data;
 
-t_input			*create_input_struct(char *str, int number);
+void			get_input(char *str, t_data *data);
+void			display_input(t_data *data);
+
+t_data			*create_data_struct(void);
+void			debug_display_data(t_data *data);
+void			destroy_data(t_data *data);
+
 
 t_data 			*get_data(t_data *data);
 
-t_room			*create_room(char *str, t_data *data);
+//t_room			*create_room(char *str, t_data *data);
+void			get_ants(t_data *data);
+void			get_room(char *str, t_data *data, int *comm);
+int				get_link(char *str, t_data *data);
+
+void			write_input(char *str, t_data *data);
 
 void			error_handler(char *message);
+
+
+
+
+
 
 
 #endif
