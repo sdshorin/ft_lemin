@@ -60,13 +60,10 @@ void			destroy_data(t_data *data);
 
 
 t_data 			*get_data(t_data *data);
-
-//t_room			*create_room(char *str, t_data *data);
 void			get_ants(t_data *data);
 void			get_room(char *str, t_data *data, int *comm);
 int				get_link(char *str, t_data *data);
 
-void			write_input(char *str, t_data *data);
 
 void			error_handler(char *message);
 

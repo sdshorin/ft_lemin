@@ -56,7 +56,7 @@ void	get_room(char *str, t_data *data, int *comm)
 {
 	static t_room	*last;
 
-	write_input(str, data);
+	get_input(str, data);
 	if (data->first == NULL)
 	{
 		data->first = create_room(str, data);
