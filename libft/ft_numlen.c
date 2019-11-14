@@ -7,17 +7,21 @@
 int	ft_numlen(const char *str)
 {
 	int len;
+	int i;
 
 	len = 0;
-	while (*str != '\0' && ft_isdigit(*str) == 0)
-		str++;
-	if (*str == '-' || *str == '+')
-		str++;
-	if (*str == '-' || *str == '+')
+	i = 0;
+	while (str[i] != '\0' && ft_isdigit(str[i]) == 0)
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 		return (0);
-	while (*str == '0')
-		str++;
-	while (str[len] != '\0' && ft_isdigit(str[len]) == 1)
+	while (str[i] == '0')
+		i++;
+	while (str[i + len] != '\0' && ft_isdigit(str[i + len]) == 1)
+		len++;
+	if (len == 0 && ft_atoi(str) == 0)
 		len++;
 	return (len);
 }
