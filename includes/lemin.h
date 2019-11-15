@@ -25,8 +25,18 @@ typedef struct	s_input
 	struct s_input	*next;
 }				t_input;
 
+typedef struct	s_recipe
+{
+	int 			len;
+	struct s_room	**path;
+	int 			q_used;
+	int				*used_by;
+}				t_recipe;
+
+
 typedef struct	s_room
 {
+	int 			index;
 	char			*name; // room name
 	int 			x;
 	int 			y;
@@ -38,7 +48,16 @@ typedef struct	s_room
 	int 			q_links; // amount of links
 	struct s_room	**links; // links
 
+	t_recipe		*recipe;
+
 }				t_room;
+
+typedef struct	s_queue
+{
+	t_room			*room;
+	struct s_queue	*next;
+
+}				t_queue;
 
 typedef struct	s_data
 {

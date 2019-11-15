@@ -69,7 +69,10 @@ static t_room	*create_room(char *str, t_data *data)
 	room->next = NULL;
 	room->level = 0;
 	room->q_links = 0;
+	room->index = data->q_rooms++;
+	room->recipe = 0;
 	room->links = NULL;
+
 	return (room);
 }
 
