@@ -28,8 +28,8 @@ typedef struct	s_input
 typedef struct	s_recipe
 {
 	int 			path_cost;
-	t_int_vector	*used_old_path;
-	int				*used_by;
+	int				need_init_vector;
+	t_int_vector	used_old_pathes;
 }				t_recipe;
 
 
@@ -43,16 +43,22 @@ typedef struct	s_room
 	int 			level; // distance from the star
 	int 			q_links; // amount of links
 	// struct s_room	**links; // links
+	
+	struct s_room	*next_on_path; //temp
+	struct s_room	*prev_on_path; //temp
+	int				path_index;
 	t_void_vector	*links;
-	t_recipe		*recipe;
+	t_recipe		recipe;
+	struct s_room	*next_in_queue;
+	struct s_room	*prev_in_queue;
 }				t_room;
 
-// typedef struct	s_queue
-// {
-// 	t_room			*room;
-// 	struct s_queue	*next;
-// 
-// }				t_queue;
+typedef struct	s_queue
+{
+	t_room			*start;
+	t_room			*finish;
+
+}				t_queue;
 
 typedef struct	s_data
 {
@@ -65,6 +71,8 @@ typedef struct	s_data
 	t_room		*end;
 
 	int 		*path; // ?
+
+	int			path_quantity; // now quantity of path 
 
 	t_input		*input_head;
 	t_input		*input_tail;
