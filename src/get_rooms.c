@@ -63,7 +63,7 @@ static t_room	*create_room(char *str, t_data *data)
 	while (validate != NULL)
 	{
 		if (ft_strequ(validate->name, room->name) == 1)
-			return (del_room(room)); // Здесь не должно выводиться сообщение об ошибке?
+			return (del_room(room)); // Здесь не должно выводиться сообщение об ошибке? Возвращается NULL в get_room, ошибка выводится там.
 		validate = validate->next;
 	}
 	room->next = NULL;
@@ -89,7 +89,7 @@ void			get_room(char *str, t_data *data, int *comm)
 	else
 	{
 		while (last->next != NULL)
-			last = last->next; // может, так же использовать last->tail, как с get_input?
+			last = last->next; // может, так же использовать last->tail, как с get_input? // здесь это сделано при помощи static переменной, это быстрее и проще добавления новых переменных в структуру
 		last->next = create_room(str, data);
 		last = last->next;
 	}
