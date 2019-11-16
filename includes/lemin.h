@@ -28,8 +28,8 @@ typedef struct	s_input
 typedef struct	s_recipe
 {
 	int 			path_cost;
-	int				need_init_vector;
 	t_int_vector	used_old_pathes;
+	int				step_back_on_path; // номер пути, по которому мы сделали обязательный шаг назад
 }				t_recipe;
 
 
@@ -44,12 +44,13 @@ typedef struct	s_room
 	int 			q_links; // amount of links
 	// struct s_room	**links; // links
 	
-	struct s_room	*next_on_path; //temp
-	struct s_room	*prev_on_path; //temp
-	int				path_index;
+	struct s_room	*next_on_path; // следующие и предыдущие комнаты на старом пути
+	struct s_room	*prev_on_path; 
+	struct s_room	*recipe_come_from;
+	int				path_index; //индекс старого пути; иначе -1
 	t_void_vector	*links;
 	t_recipe		recipe;
-	struct s_room	*next_in_queue;
+	struct s_room	*next_in_queue; // реализация очереди
 	struct s_room	*prev_in_queue;
 }				t_room;
 
@@ -73,6 +74,7 @@ typedef struct	s_data
 	int 		*path; // ?
 
 	int			path_quantity; // now quantity of path 
+	int			math_path_cost;
 
 	t_input		*input_head;
 	t_input		*input_tail;
