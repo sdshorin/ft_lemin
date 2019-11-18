@@ -39,7 +39,7 @@ typedef struct	s_room
 	char			*name; // room name
 	int 			x;
 	int 			y;
-	struct s_room	*next; //temp
+	struct s_room	*next;
 	int 			level; // distance from the star
 	int 			q_links; // amount of links
 	// struct s_room	**links; // links
@@ -74,7 +74,8 @@ typedef struct	s_data
 	int 		*path; // ?
 
 	int			path_quantity; // now quantity of path 
-	int			math_path_cost;
+	int			sum_path_len;
+	int			max_path_cost;
 
 	t_input		*input_head;
 	t_input		*input_tail;
