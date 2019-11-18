@@ -164,12 +164,24 @@ void handle_node_on_old_path(t_room	*now_room, t_queue *queue)
 
 /////////////////////// end handle node with uesd on old path //////////
 
+
+int check_can_add_way(t_data *data)
+{
+	if (data->path_quantity >= data->start->links.size ||
+		data->path_quantity >= data->end->links.size)
+		return (1);
+	return (0);
+}
+
+
 ///////////////// find new way iteration /////////////
 int find_new_way(t_data *data)
 {
 	t_queue queue;
 	t_room	*now_room;
 
+	if (check_can_add_way(data))
+		return (0);
 	init_queue(&queue);
 	add_start(&queue, data->start);
 	while (queue.start)
