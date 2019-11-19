@@ -101,4 +101,18 @@ int				ft_strchr_pos(const char *str, int c);
 int				get_next_line(const int fd, char **line, int err);
 
 
+typedef struct	s_void_vector // need move to header file
+{
+	size_t	capacity;
+	size_t	size;
+	void	**data;
+}				t_void_vector;
+
+void	void_vector_free(t_void_vector *v_vector);
+int		void_vector_init(t_void_vector *v_vector);
+int		void_vector_push_back(t_void_vector *v_vector, void *v);
+void	*void_vector_pop_back(t_void_vector *v_vector);
+
+
+
 #endif

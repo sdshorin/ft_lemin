@@ -11,8 +11,9 @@ INC_DIR = ./includes/
 LIBFT_DIR = ./libft/
 LFT = -L $(LIBFT_DIR) -lft
 
-SRCS_LIST = main.c
-HEADERS_LIST = lem-in.h
+SRCS_LIST = main.c find_way.c answer_ants_run.c destroyers.c get_ants.c get_data.c get_linls.c \
+get_rooms.c init_data.c store_input_strings.c
+HEADERS_LIST = lemin.h
 
 SRCS = $(addprefix $(SRC_DIR),$(SRCS_LIST))
 
@@ -23,19 +24,19 @@ INCLUDES = -I $(INC_DIR) -I $(LIBFT_DIR)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-all: $(NAME_PS) $(NAME_CH)
+all: $(NAME)
 
 %.o: %.c $(addprefix $(INC_DIR),$(HEADERS_LIST))
 	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 	@echo ".\c"
 
-$(NAME_PS): $(LIBFT) $(OP_OBJS) $(PS_OBJS)
-	@$(CC) $(CFLAGS) $(LFT) $(INCLUDES) $(OP_OBJS) $(PS_OBJS) -o $(NAME_PS)
+$(NAME): $(LIBFT) $(OBJS)
+	@$(CC) $(CFLAGS) $(LFT) $(INCLUDES) $(OBJS) -o $(NAME)
 	@echo "$(NAME_PS) executable created"
 
-$(NAME_CH): $(LIBFT) $(OP_OBJS) $(CH_OBJS)
-	@$(CC) $(CFLAGS) $(LFT) $(INCLUDES) $(OP_OBJS) $(CH_OBJS) -o $(NAME_CH)
-	@echo "$(NAME_CH) executable created"
+# $(NAME_CH): $(LIBFT) $(OP_OBJS) $(CH_OBJS)
+# 	@$(CC) $(CFLAGS) $(LFT) $(INCLUDES) $(OP_OBJS) $(CH_OBJS) -o $(NAME_CH)
+# 	@echo "$(NAME_CH) executable created"
 
 FORCE: ;
 
@@ -43,12 +44,12 @@ $(LIBFT): FORCE
 	@make -C $(LIBFT_DIR)
 
 clean:
-	@/bin/rm -f $(OP_OBJS) $(CH_OBJS) $(PS_OBJS)
+	@/bin/rm -f $(OBJS) $(OBJS) $(OBJS)
 	@echo "Object files deleted"
 	@make clean -C $(LIBFT_DIR)
 
 fclean: clean
-	@/bin/rm -f $(NAME_CH) $(NAME_PS)
+	@/bin/rm -f $(NAME)
 	@echo "Executable files deleted"
 	@make fclean -C $(LIBFT_DIR)
 

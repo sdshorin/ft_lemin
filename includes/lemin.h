@@ -28,7 +28,7 @@ typedef struct	s_input
 typedef struct	s_recipe
 {
 	int 			path_cost;
-	t_int_vector	used_old_pathes;
+	t_void_vector	used_old_pathes;
 	int				step_back_on_path; // номер пути, по которому мы сделали обязательный шаг назад
 }				t_recipe;
 
@@ -111,6 +111,8 @@ int				read_comments(t_data *data, char **str);
 void			error_handler(char *message, t_data *data);
 
 
+int lem_in_find_paths(t_data *data);
+int run_ants_print_answer(t_data *data);
 
 
 

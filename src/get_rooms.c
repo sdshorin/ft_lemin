@@ -48,6 +48,18 @@ static t_room	*del_room(t_room *room)
 	return (NULL);
 }
 
+static void init_room(t_room *room)
+{
+	room->next = NULL;
+	room->level = 0;
+	room->q_links = 0;
+	room->recipe.path_cost = -1;
+	room->recipe.step_back_on_path = 0;
+	void_vector_init(&room->recipe.used_old_pathes);
+	void_vector_init(&room->links);
+	// room->links = NULL;
+}
+
 static t_room	*create_room(char *str, t_data *data)
 {
 	t_room	*room;
@@ -66,12 +78,8 @@ static t_room	*create_room(char *str, t_data *data)
 			return (del_room(room)); // Здесь не должно выводиться сообщение об ошибке? Возвращается NULL в get_room, ошибка выводится там.
 		validate = validate->next;
 	}
-	room->next = NULL;
-	room->level = 0;
-	room->q_links = 0;
+	init_room(room);
 	room->index = data->q_rooms++;
-	room->recipe = 0;
-	room->links = NULL;
 
 	return (room);
 }

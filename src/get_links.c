@@ -30,17 +30,18 @@ static void		add_link(t_room *link_dst, t_room *link_src, t_data *data)
 	int		i;
 
 	n = link_src->q_links;
-	if ((new = (t_room **)malloc(sizeof(t_room *) * (n + 1))) == NULL)
-		error_handler("Allocation error in add_link!", data);
-	i = 0;
-	while (i < n)
-	{
-		new[i] = link_src->links[i];
-		i++;
-	}
-	new[i] = link_dst;
-	free(link_src->links);
-	link_src->links = new;
+	void_vector_push_back(&link_src->links, link_dst);
+	// if ((new = (t_room **)malloc(sizeof(t_room *) * (n + 1))) == NULL)
+	// 	error_handler("Allocation error in add_link!", data);
+	// i = 0;
+	// while (i < n)
+	// {
+	// 	new[i] = link_src->links[i];
+	// 	i++;
+	// }
+	// new[i] = link_dst;
+	// free(link_src->links);
+	// link_src->links = new;
 	link_src->q_links++;
 }
 

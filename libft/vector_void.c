@@ -13,19 +13,14 @@
 #include "libft.h"
 
 
-typedef struct	s_void_vector // need move to header file
-{
-	size_t	capacity;
-	size_t	size;
-	void	**data;
-}				t_void_vector;
 
-void	free_v_vector(t_void_vector *v_vector)
+
+void	void_vector_free(t_void_vector *v_vector)
 {
 	free(v_vector->data);
 }
 
-int		init_v_vector(t_void_vector *v_vector)
+int		void_vector_init(t_void_vector *v_vector)
 {
 	v_vector->size = 0;
 	v_vector->capacity = 16;
@@ -35,7 +30,7 @@ int		init_v_vector(t_void_vector *v_vector)
 	return (0);
 }
 
-int		v_vector_push_back(t_void_vector *v_vector, void *v)
+int		void_vector_push_back(t_void_vector *v_vector, void *v)
 {
 	void	**new_data;
 
@@ -58,10 +53,10 @@ int		v_vector_push_back(t_void_vector *v_vector, void *v)
 	return (0);
 }
 
-void	*v_vector_pop_back(t_void_vector *v_vector)
+void	*void_vector_pop_back(t_void_vector *v_vector)
 {
 	if (v_vector->size <= 0)
-		return ('\0');
+		return (0);
 	v_vector->size--;
 	return (v_vector->data[v_vector->size]);
 }
