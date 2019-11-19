@@ -79,7 +79,18 @@ typedef struct	s_data
 
 	t_input		*input_head;
 	t_input		*input_tail;
+
+	
 }				t_data;
+
+typedef struct s_ant
+{
+	t_room 	*now_room;
+	int		ant_index;
+	int		to_delelte;
+	struct s_ant *next_ant;
+	struct s_ant *prev_ant;
+}				t_ant;
 
 void			get_input(char *str, t_data *data);
 void			display_input(t_data *data);

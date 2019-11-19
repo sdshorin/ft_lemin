@@ -288,9 +288,9 @@ void reset_all_recipe(t_data *data)
 	now_room = data->first;
 	while (now_room)
 	{
-		now_room->s_recipe.path_cost = -1;
-		int_vector_reset(&now_room->s_recipe.used_old_pathes);
-		now_room->step_back_on_path = 0;
+		now_room->recipe.path_cost = -1;
+		int_vector_reset(&now_room->recipe.used_old_pathes);
+		now_room->recipe.step_back_on_path = 0;
 	}
 	data->end.prev_on_path = 0;
 	data->end.next_on_path = 0;
