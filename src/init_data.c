@@ -28,5 +28,6 @@ t_data	*create_data_struct(void)
 	data->path = NULL; // ?
 	data->input_head = NULL;
 	data->input_tail = NULL;
+	data->sum_path_len = 0;
 	return (data);
 }

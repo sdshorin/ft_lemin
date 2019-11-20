@@ -188,6 +188,7 @@ t_room	*back_with_rewrite_to_old_path(t_room *now_room, int path_index, t_room *
 		now_room->path_index = path_index;
 		now_room->prev_on_path = now_room->recipe_come_from;
 		now_room->recipe_come_from->next_on_path = now_room;
+		now_room = now_room->recipe_come_from;
 	}
 	return (now_room);
 }
@@ -257,6 +258,7 @@ void reset_all_recipe(t_data *data)
 		now_room->recipe.path_cost = -1;
 		int_vector_reset(&now_room->recipe.used_old_paths);
 		now_room->recipe.step_back_on_path = 0;
+		now_room = now_room->next;
 	}
 	data->end->prev_on_path = 0;
 	data->end->next_on_path = 0;
@@ -275,6 +277,7 @@ int lem_in_find_paths(t_data *data)
 	while (find_new_way(data))
 	{
 		make_new_way(data);
+		data->path_quantity++;
 		count_new_max_path_cost(data);
 		reset_all_recipe(data);
 	}

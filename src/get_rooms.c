@@ -20,6 +20,10 @@ static void		init_room(t_room *room)
 	room->recipe.path_cost = -1;
 	room->recipe.step_back_on_path = 0;
 	room->path_index = -1;
+	room->next_in_queue = 0;
+	room->prev_in_queue = 0;
+	room->next_on_path = 0;
+	room->recipe_come_from = 0;
 	int_vector_init(&room->recipe.used_old_paths);
 	void_vector_init(&room->links);
 	// room->links = NULL;
