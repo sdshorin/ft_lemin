@@ -57,3 +57,19 @@ void	*void_vector_pop_back(t_void_vector *v_vector)
 	v_vector->size--;
 	return (v_vector->data[v_vector->size]);
 }
+
+
+
+void pint_void_vector(t_void_vector *v_vector)
+{
+	size_t i;
+
+	i = 0;
+	printf("\n");
+	while (i < v_vector->size)
+	{
+		printf("%zu - %p\n", i, v_vector->data[i]);
+		i++;
+	}
+	printf("--------------\n");
+}

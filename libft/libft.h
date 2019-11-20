@@ -133,8 +133,11 @@ int				int_vector_push_back(t_int_vector *int_vector, int i);
 int				int_vector_pop_back(t_int_vector *int_vector);
 
 void 			int_vector_copy(t_int_vector *dst, t_int_vector *src);
+
+#include <stdio.h>
 void int_vector_reset(t_int_vector *src);
 void int_vector_push_front(t_int_vector *int_vector, int new_num);
+void pint_void_vector(t_void_vector *v_vector);
 
 
 

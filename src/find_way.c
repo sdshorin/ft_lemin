@@ -21,6 +21,7 @@ void		add_start(t_queue *queue, t_room *start)
 	start->recipe.path_cost = 0;
 	i = 0;
 	v_vector = start->links.data;
+	pint_void_vector(&start->links);
 	while (i < start->links.size)
 	{
 		if (((t_room*)v_vector[i])->path_index <= 0)
@@ -66,7 +67,7 @@ void handle_ordinary_room(t_room *now_room, t_queue *queue)
 	v_vector = now_room->links.data;
 	while (i < now_room->links.size)
 	{
-		if (make_recipe(now_room->recipe, (t_room *)v_vector[i]))
+		if (!make_recipe(now_room->recipe, (t_room *)v_vector[i]))
 			add_to_queue(queue, (t_room *)v_vector[i], now_room);
 		i++;
 	}
@@ -137,7 +138,7 @@ int		check_can_add_way(t_data *data)
 int		find_new_way(t_data *data)
 {
 	t_queue	queue;
-	t_room	*now_room;
+	t_room	*now_room; 
 
 	if (check_can_add_way(data))
 		return (0);
