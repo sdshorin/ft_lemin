@@ -22,7 +22,7 @@ OBJS = $(SRCS:.c=.o)
 INCLUDES = -I $(INC_DIR) -I $(LIBFT_DIR)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 

@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 
-# define BUFF_SIZE 1
+// # define BUFF_SIZE 1
 
 typedef struct	s_list
 {
@@ -120,7 +120,7 @@ void			ft_putnstr(char const *s, int len);
 long long int	ft_strtol(const char *str);
 int				ft_numlen(const char *str);
 int				ft_strchr_pos(const char *str, int c);
-int				get_next_line(const int fd, char **line, int err);
+int				get_next_line(const int fd, char **line);
 
 void			void_vector_free(t_void_vector *v_vector);
 int				void_vector_init(t_void_vector *v_vector);

@@ -55,7 +55,7 @@ void		destroy_data(t_data *data)
 {
 	if (data != NULL)
 	{
-		get_next_line(0, NULL, -1);
+		get_next_line(0, NULL);
 		destroy_rooms(data);
 		destroy_input(data);
 		free(data);

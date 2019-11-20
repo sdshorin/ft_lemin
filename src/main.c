@@ -14,7 +14,7 @@
 
 void	error_handler(char *message, t_data *data)
 {
-	get_next_line(0, NULL, -1);
+	get_next_line(0, NULL);
 	if (data != NULL)
 		destroy_data(data);
 	ft_putendl_fd(message, 2);
