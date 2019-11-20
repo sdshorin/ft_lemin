@@ -24,7 +24,7 @@ void		add_start(t_queue *queue, t_room *start)
 	pint_void_vector(&start->links);
 	while (i < start->links.size)
 	{
-		if (((t_room*)v_vector[i])->path_index <= 0)
+		if (((t_room*)v_vector[i])->path_index < 0)
 		{
 			make_first_recipe(start->recipe, (t_room*)v_vector[i]);
 			add_to_queue(queue, (t_room*)v_vector[i], start);
@@ -49,7 +49,7 @@ int make_recipe(t_recipe prev_recipe, t_room *room)
 	room->recipe.path_cost = prev_recipe.path_cost + 1;
 	int_vector_reset(&room->recipe.used_old_paths);
 	int_vector_copy(&prev_recipe.used_old_paths, &room->recipe.used_old_paths);
-	if (room->path_index > 0)
+	if (room->path_index > -1)
 	{
 		room->recipe.step_back_on_path = 0;
 //		room->recipe.used_old_paths.push_back(room->path_index);
@@ -115,7 +115,7 @@ void	handle_node_on_old_path(t_room	*now_room, t_queue *queue)
 	{
 		if (((t_room*)v_vector[i]) != now_room->next_on_path)
 		{
-			if (make_recipe_from_old_path(now_room, (t_room*)v_vector[i]))
+			if (!make_recipe_from_old_path(now_room, (t_room*)v_vector[i]))
 				add_to_queue(queue, (t_room*)v_vector[i], now_room);
 		}
 		i++;
@@ -147,7 +147,7 @@ int		find_new_way(t_data *data)
 	while (queue.start)
 	{
 		now_room = get_from_queue(&queue);
-		if (now_room->recipe.path_cost > data->max_path_cost && data->max_path_cost >= 0)
+		if ((now_room->recipe.path_cost > data->max_path_cost && data->max_path_cost >= 0 )|| now_room == data->start)
 			continue ;
 		if (now_room == data->end)
 		{
@@ -156,7 +156,7 @@ int		find_new_way(t_data *data)
 			else
 				continue;
 		}
-		if (now_room->path_index > 0)
+		if (now_room->path_index > -1)
 			handle_node_on_old_path(now_room, &queue);
 		else
 			handle_ordinary_room(now_room, &queue);
@@ -200,7 +200,7 @@ t_room	*back_with_rewrite_to_old_path(t_room *now_room, int path_index, t_room *
 t_room	*clear_part_of_old_path(t_room *now_room)
 {
 	now_room = now_room->recipe_come_from;
-	while (now_room->recipe_come_from->path_index >= 0)
+	while (now_room->recipe_come_from->path_index > -1)
 	{
 		now_room->next_on_path = 0;
 		now_room->prev_on_path = 0;
@@ -235,26 +235,28 @@ void	make_new_way(t_data *data)
 ////////////// count_new_max_path_cost
 void count_new_max_path_cost(t_data *data)
 {
+	data->path_quantity += 1;
 	if (data->sum_path_len == 0)
 		data->sum_path_len += data->ants;
 	data->sum_path_len += data->end->recipe.path_cost;
 	data->max_path_cost = (data->sum_path_len / data->path_quantity);
 	if (data->sum_path_len & data->path_quantity)
 		data->max_path_cost += 1;
-	data->path_quantity += 1;
 }
 ////////////////// end count_new_max_path_cost
 
 
 
 ////////////////// reset_all_recipe
-void reset_all_recipe(t_data *data)
+void reset_all_room(t_data *data)
 {
 	t_room *now_room;
 
 	now_room = data->first;
 	while (now_room)
 	{
+		now_room->prev_in_queue = 0;
+		now_room->next_in_queue = 0;
 		now_room->recipe.path_cost = -1;
 		int_vector_reset(&now_room->recipe.used_old_paths);
 		now_room->recipe.step_back_on_path = 0;
@@ -277,9 +279,8 @@ int lem_in_find_paths(t_data *data)
 	while (find_new_way(data))
 	{
 		make_new_way(data);
-		data->path_quantity++;
 		count_new_max_path_cost(data);
-		reset_all_recipe(data);
+		reset_all_room(data);
 	}
 	return (0);
 }

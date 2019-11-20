@@ -59,6 +59,8 @@ t_ant *delete_ant(t_ant *ant, t_ant **first_ant)
 	if (ant->prev_ant)
 		ant->prev_ant->next_ant = ant->next_ant;
 	to_return = ant->next_ant;
+	if (ant->next_ant)
+		ant->next_ant->prev_ant = 0;
 	if (ant == *first_ant)
 		*first_ant = to_return;
 	free(ant);
