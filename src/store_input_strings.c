@@ -50,5 +50,5 @@ void			display_input(t_data *data)
 		ft_putendl(input->str);
 		input = input->next;
 	}
-	ft_putendl("");
+	write(1, "\n", 1);
 }

@@ -55,7 +55,7 @@ static void init_room(t_room *room)
 	room->q_links = 0;
 	room->recipe.path_cost = -1;
 	room->recipe.step_back_on_path = 0;
-	void_vector_init(&room->recipe.used_old_pathes);
+	void_vector_init(&room->recipe.used_old_paths);
 	void_vector_init(&room->links);
 	// room->links = NULL;
 }

@@ -14,7 +14,7 @@ void make_ant(int ant_index, t_ant **first_ant, t_room *next_room)
 	now_ant->ant_index = ant_index;
 	now_ant->now_room = next_room;
 	now_ant->next_ant = 0;
-	now_ant->to_delelte = 0;
+	now_ant->to_delete = 0;
 	if (last_ant == 0)
 	{
 		last_ant = now_ant;
@@ -69,7 +69,7 @@ void move_now_ants(t_ant *ant, t_room *end)
 	need_whitespace = 0;
 	while (ant)
 	{
-		if (ant->to_delelte)
+		if (ant->to_delete)
 		{
 			ant = delete_ant(ant);
 			continue ;
@@ -83,7 +83,7 @@ void move_now_ants(t_ant *ant, t_room *end)
 		ft_putstr(ant->now_room->name);
 		ant->now_room = ant->now_room->next_on_path;
 		if (ant->now_room == end)
-			ant->to_delelte = 1;
+			ant->to_delete = 1;
 		ant = ant->next_ant;
 	}
 }

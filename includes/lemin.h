@@ -28,7 +28,7 @@ typedef struct	s_input
 typedef struct	s_recipe
 {
 	int 			path_cost;
-	t_void_vector	used_old_pathes;
+	t_void_vector	used_old_paths;
 	int				step_back_on_path; // номер пути, по которому мы сделали обязательный шаг назад
 }				t_recipe;
 
@@ -85,37 +85,30 @@ typedef struct	s_data
 
 typedef struct s_ant
 {
-	t_room 	*now_room;
-	int		ant_index;
-	int		to_delelte;
-	struct s_ant *next_ant;
-	struct s_ant *prev_ant;
+	t_room 			*now_room;
+	int				ant_index;
+	int				to_delete;
+	struct s_ant	*next_ant;
+	struct s_ant	*prev_ant;
 }				t_ant;
 
 void			get_input(char *str, t_data *data);
 void			display_input(t_data *data);
-
 t_data			*create_data_struct(void);
+
 void			display_debug_data(t_data *data);
+
 void			destroy_data(t_data *data);
-
-
 t_data 			*get_data(t_data *data);
 void			get_ants(t_data *data);
 void			get_room(char *str, t_data *data, int *comm);
 int				get_link(char *str, t_data *data);
-
 int				read_comments(t_data *data, char **str);
-
-
 void			error_handler(char *message, t_data *data);
 
 
-int lem_in_find_paths(t_data *data);
-int run_ants_print_answer(t_data *data);
-
-
-
+int				lem_in_find_paths(t_data *data);
+int				run_ants_print_answer(t_data *data);
 
 
 #endif
