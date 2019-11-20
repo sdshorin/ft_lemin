@@ -61,9 +61,40 @@ int		int_vector_pop_back(t_int_vector *int_vector)
 	return (int_vector->data[int_vector->size]);
 }
 
-void 	int_vector_copy(t_int_vector *src, t_int_vector *dst)
+void 	int_vector_copy(t_int_vector *dst, t_int_vector *src)
 {
-	dst->capacity = src->capacity;
-	dst->size = src->size;
-	dst->data = src->data;
+	size_t i;
+
+	int_vector_reset(dst);
+	i = 0;
+	while (i < src->size)
+	{
+		int_vector_push_back(dst, src->data[i]);
+		i++;
+	}
+}
+
+void int_vector_reset(t_int_vector *src)
+{
+	src->size = 0;
+}
+
+void int_vector_push_front(t_int_vector *int_vector, int new_num)
+{
+	int last_elem;
+	size_t i;
+	if (int_vector->size  > 0)
+	{
+		i = 0;
+		last_elem = int_vector->data[int_vector->size - 1];
+		while (i < int_vector->size - 1)
+		{
+			int_vector->data[i + 1] = int_vector->data[i];
+			i++;
+		}
+		int_vector->data[0] = new_num;
+		int_vector_push_back(int_vector, last_elem);
+	}
+	else
+		int_vector_push_back(int_vector, new_num);
 }

@@ -23,9 +23,9 @@ static void	destroy_rooms(t_data *data)
 	while (cur != NULL)
 	{
 		ft_strdel(&(cur->name));
-		if (cur->links != NULL)
-			free(cur->links);
-		cur->links = NULL;
+		// if (cur->links != NULL)
+		// 	free(cur->links);
+		// cur->links = NULL;
 		prev = cur;
 		cur = cur->next;
 		free(prev);

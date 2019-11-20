@@ -132,7 +132,10 @@ int				int_vector_init(t_int_vector *int_vector);
 int				int_vector_push_back(t_int_vector *int_vector, int i);
 int				int_vector_pop_back(t_int_vector *int_vector);
 
-void 			int_vector_copy(t_int_vector *src, t_int_vector *dst);
+void 			int_vector_copy(t_int_vector *dst, t_int_vector *src);
+void int_vector_reset(t_int_vector *src);
+void int_vector_push_front(t_int_vector *int_vector, int new_num);
+
 
 
 

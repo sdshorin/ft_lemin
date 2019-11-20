@@ -19,8 +19,8 @@ static void		init_room(t_room *room)
 	room->q_links = 0;
 	room->recipe.path_cost = -1;
 	room->recipe.step_back_on_path = 0;
-	void_vector_init(&room->recipe.used_old_paths);
-	void_vector_init(room->links);
+	int_vector_init(&room->recipe.used_old_paths);
+	void_vector_init(&room->links);
 	// room->links = NULL;
 }
 
@@ -32,7 +32,7 @@ static t_room	*del_room(t_room *room)
 	return (NULL);
 }
 
-static int		get_room_params(char *str, t_room *room, t_data *data)
+static int		get_room_params(char *str, t_room *room) //, t_data *data)
 {
 	int		name_len;
 	int		num_len;
@@ -67,7 +67,7 @@ static t_room	*create_room(char *str, t_data *data)
 
 	if ((room = (t_room *)malloc(sizeof(t_room))) == NULL)
 		return (NULL);
-	if ((get_room_params(str, room, data)) == -1)
+	if ((get_room_params(str, room)) == -1)
 		return (del_room(room));
 	validate = data->first;
 	while (validate != NULL)

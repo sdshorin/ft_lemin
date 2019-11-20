@@ -34,13 +34,13 @@ void make_ant(int ant_index, t_ant **first_ant, t_room *next_room)
 
 void create_now_ants(int ants, int *ant_index, t_ant** first_ant, t_room *start)
 {
-	int	i;
+	size_t	i;
 	void **v_vector;
 	if (ants <= 0)
 		return ;
 	i = 0;
-	v_vector = start->links->data;
-	while (i < start->links->size && ants > 0)
+	v_vector = start->links.data;
+	while (i < start->links.size && ants > 0)
 	{
 		if (((t_room*)v_vector[i])->path_index >= 0)
 		{
@@ -89,7 +89,7 @@ void move_now_ants(t_ant *ant, t_room *end)
 }
 
 
-int run_ants_print_answer(t_data *data)
+void run_ants_print_answer(t_data *data)
 {
 	t_ant	*first_ant;
 	int		ant_index;
