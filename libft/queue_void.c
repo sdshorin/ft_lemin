@@ -57,8 +57,8 @@ int		t_void_queue_push(t_void_queue *void_queue, void *v)
 		void_queue->size++;
 		return (0);
 	}
-	if (resize_void_queue(void_queue));
-	return (-1);
+	if (resize_void_queue(void_queue))
+		return (-1);
 	void_queue->data[void_queue->size] = v;
 	void_queue->size++;
 	return (0);

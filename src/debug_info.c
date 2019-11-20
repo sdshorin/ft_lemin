@@ -32,8 +32,9 @@ void	display_debug_data(t_data *data)
 		printf("It's links:\n");
 		while (j < room->q_links)
 		{
-			printf(" Link #%d name: %s\n", j, room->links[j]->name);
+//			printf(" Link #%d name: %s\n", j, room->links[j].name);
 			j++;
+			printf("nothing :c");
 		}
 		printf("\n");
 		j = 0;

@@ -12,9 +12,6 @@
 
 #include "libft.h"
 
-
-
-
 void	void_vector_free(t_void_vector *v_vector)
 {
 	free(v_vector->data);
@@ -44,8 +41,8 @@ int		void_vector_push_back(t_void_vector *v_vector, void *v)
 	new_data = (void**)malloc(v_vector->capacity * sizeof(void*));
 	if (!new_data)
 		return (1);
-	ft_memcpy(new_data, v_vector->data,\
-						(v_vector->capacity / 2) * sizeof(void*));
+	ft_memcpy(new_data, v_vector->data,
+			(v_vector->capacity / 2) * sizeof(void*));
 	free(v_vector->data);
 	v_vector->data = new_data;
 	v_vector->data[v_vector->size] = v;

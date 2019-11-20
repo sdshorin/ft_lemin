@@ -25,7 +25,6 @@ void	add_to_queue(t_queue *queue, t_room *room, t_room *come_from)
 	queue->finish = room;
 }
 
-
 t_room	*get_from_queue(t_queue *queue)
 {
 	t_room	*to_return;

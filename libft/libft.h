@@ -33,6 +33,13 @@ typedef struct	s_void_vector
 	void	**data;
 }				t_void_vector;
 
+typedef struct	s_int_vector
+{
+	size_t	capacity;
+	size_t	size;
+	int		*data;
+}				t_int_vector;
+
 typedef struct	s_void_queue
 {
 	size_t	capacity;
@@ -115,17 +122,24 @@ int				ft_numlen(const char *str);
 int				ft_strchr_pos(const char *str, int c);
 int				get_next_line(const int fd, char **line, int err);
 
-
 void			void_vector_free(t_void_vector *v_vector);
 int				void_vector_init(t_void_vector *v_vector);
 int				void_vector_push_back(t_void_vector *v_vector, void *v);
 void			*void_vector_pop_back(t_void_vector *v_vector);
+
+void			int_vector_free(t_int_vector *int_vector);
+int				int_vector_init(t_int_vector *int_vector);
+int				int_vector_push_back(t_int_vector *int_vector, int i);
+int				int_vector_pop_back(t_int_vector *int_vector);
+
+void 			int_vector_copy(t_int_vector *src, t_int_vector *dst);
+
+
 
 void			void_queue_free(t_void_queue *void_queue);
 int				void_queue_init(t_void_queue *int_queue);
 int 			resize_void_queue(t_void_queue *void_queue);
 int				t_void_queue_push(t_void_queue *void_queue, void *v);
 void			*void_queue_pop_back(t_void_queue *void_queue);
-
 
 #endif

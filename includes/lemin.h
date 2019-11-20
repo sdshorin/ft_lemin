@@ -106,6 +106,9 @@ int				get_link(char *str, t_data *data);
 int				read_comments(t_data *data, char **str);
 void			error_handler(char *message, t_data *data);
 
+void			init_queue(t_queue *queue);
+void			add_to_queue(t_queue *queue, t_room *room, t_room *come_from);
+t_room			*get_from_queue(t_queue *queue);
 
 int				lem_in_find_paths(t_data *data);
 int				run_ants_print_answer(t_data *data);
