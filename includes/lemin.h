@@ -19,7 +19,7 @@
 # include "libft.h"
 
 typedef struct	s_input
-{
+{ // does we need it?
 	//This struct needed to put input to output
 	char 			*str;
 	struct s_input	*next;
@@ -27,9 +27,8 @@ typedef struct	s_input
 
 typedef struct	s_recipe
 {
-	int 			len;
-	struct s_room	**path;
-	int 			q_used;
+	int 			path_cost;
+	t_int_vector	*used_old_path;
 	int				*used_by;
 }				t_recipe;
 
@@ -40,24 +39,20 @@ typedef struct	s_room
 	char			*name; // room name
 	int 			x;
 	int 			y;
-
 	struct s_room	*next; //temp
-
 	int 			level; // distance from the star
-
 	int 			q_links; // amount of links
-	struct s_room	**links; // links
-
+	// struct s_room	**links; // links
+	t_void_vector	*links;
 	t_recipe		*recipe;
-
 }				t_room;
 
-typedef struct	s_queue
-{
-	t_room			*room;
-	struct s_queue	*next;
-
-}				t_queue;
+// typedef struct	s_queue
+// {
+// 	t_room			*room;
+// 	struct s_queue	*next;
+// 
+// }				t_queue;
 
 typedef struct	s_data
 {

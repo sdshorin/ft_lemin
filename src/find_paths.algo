@@ -1,15 +1,27 @@
-func get_max_way(now_path_quantity):
+
+
+
+
+get_max_way(now_path_quantity):
 	static int max_way
 	static pas_quantity
 	if (now_path_quantity > pas_quantity):
 		max_way = count_max_wat()
 	return max_way
 
+
+
+
+
 func can_we_use_this_node(t_node):
 	if t_node == start:
 		return false
+	return true
 
-finish_recipe = []
+
+
+
+finish_recipt = []
 
 
 func find_new_way():
@@ -48,6 +60,11 @@ func find_new_way():
 		return null # stop wuile in func start() 
 	win_recipt = find_finisf_recipt_with_min_cost()
 	retun win_recipt
+
+		
+
+
+
 
 func start():
 	if !find_min_way() # ищем самый первый наикратчайший путь
