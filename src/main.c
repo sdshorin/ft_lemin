@@ -29,8 +29,8 @@ int		main(void)
 	get_data(data);
 	if (data->start == data->end)
 		error_handler("Error: start == end!", data);
-	display_input(data);
-	display_debug_data(data);
+//	display_input(data);
+//	display_debug_data(data);
 	destroy_data(data);
 	return (0);
 }

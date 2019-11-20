@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static int		get_room_params(char *str, t_room *room, t_data *data)
+static int		get_room_params(char *str, t_room *room)
 {
 	int		name_len;
 	int		num_len;
@@ -55,7 +55,7 @@ static t_room	*create_room(char *str, t_data *data)
 
 	if ((room = (t_room *)malloc(sizeof(t_room))) == NULL)
 		return (NULL);
-	if ((get_room_params(str, room, data)) == -1)
+	if ((get_room_params(str, room)) == -1)
 	{
 		return (del_room(room));
 	}

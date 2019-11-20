@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static t_room	*match_name(char *name, t_room *room, t_data *data)
+static t_room	*match_name(char *name, t_room *room)
 {
 	while (room != NULL)
 	{
@@ -58,8 +58,8 @@ int				get_link(char *str, t_data *data)
 	name1 = ft_strsub(str, 0, ft_strchr_pos(str, '-'));
 	n2len = ft_strlen(ft_strchr(str, '-') + 1);
 	name2 = ft_strsub(str, ft_strchr_pos(str, '-') + 1, n2len);
-	room1 = match_name(name1, data->first, data);
-	room2 = match_name(name2, data->first, data);
+	room1 = match_name(name1, data->first);
+	room2 = match_name(name2, data->first);
 	ft_strdel(&name1);
 	ft_strdel(&name2);
 	if (room1 == NULL || room2 == NULL)

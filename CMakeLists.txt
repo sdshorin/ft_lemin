@@ -4,7 +4,7 @@ project(lem-in)
 set(CMAKE_C_STANDARD 99)
 
 set(SOURCES src/main.c)
-set(CMAKE_CXX_FLAGS g)
+set(CMAKE_C_FLAGS "-o3")
 include_directories(libft)
 include_directories(includes)
 add_executable(lem-in src/main.c src/get_data.c includes/lemin.h src/get_rooms.c src/store_input_strings.c src/get_links.c src/get_ants.c src/init_data.c src/destroyers.c src/debug_info.c src/bfs.c)
