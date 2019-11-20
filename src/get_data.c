@@ -40,7 +40,7 @@ int				read_comments(t_data *data, char **str)
 
 static t_data	*finish_reading(t_data *data, char **str)
 {
-	get_next_line(0, str);
+	get_next_line(data->fd, str);
 	ft_strdel(str);
 	return (data);
 }
@@ -54,7 +54,7 @@ t_data			*get_data(t_data *data)
 	mode = 0;
 	comm = 0;
 	get_ants(data);
-	while (get_next_line(0, &str) > 0)
+	while (get_next_line(data->fd, &str) > 0)
 	{
 		if (str[0] == 'L')
 		{

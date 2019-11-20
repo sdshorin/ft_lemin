@@ -18,6 +18,7 @@ t_data	*create_data_struct(void)
 
 	if ((data = (t_data *)malloc(sizeof(t_data))) == NULL)
 		error_handler("Allocation error in create_data!", NULL);
+	data->fd = 0;
 	data->ants = -1;
 	data->q_rooms = 0;
 	data->first = NULL;

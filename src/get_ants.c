@@ -18,7 +18,7 @@ void	get_ants(t_data *data)
 	int		len;
 	int		result;
 
-	while (get_next_line(0, &str))
+	while (get_next_line(data->fd, &str))
 	{
 		if (str[0] == '\n' || str[0] == '\0')
 			error_handler("Cannot read ants!", data);

@@ -80,6 +80,7 @@ typedef struct	s_data
 	t_input		*input_head;
 	t_input		*input_tail;
 
+	int			fd;
 	
 }				t_data;
 

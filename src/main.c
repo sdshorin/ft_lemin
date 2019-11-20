@@ -11,21 +11,27 @@
 /* ************************************************************************** */
 
 #include "lemin.h"
+#include <fcntl.h>
 
 void	error_handler(char *message, t_data *data)
 {
-	get_next_line(0, NULL);
+	get_next_line(data->fd, NULL);
 	if (data != NULL)
 		destroy_data(data);
 	ft_putendl_fd(message, 2);
 	exit(1);
 }
 
-int		main(void)
+int		main(int argc, char **argv)
 {
 	t_data	*data;
 
 	data = create_data_struct();
+	if (argc > 1)
+	{
+		ft_putendl("Trying to read graph from file...");
+		data->fd = open(argv[1], O_RDONLY);
+	}
 	get_data(data);
 	if (data->start == data->end)
 		error_handler("Error: start == end!", data);
