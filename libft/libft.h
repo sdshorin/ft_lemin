@@ -26,6 +26,21 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+typedef struct	s_void_vector
+{
+	size_t	capacity;
+	size_t	size;
+	void	**data;
+}				t_void_vector;
+
+typedef struct	s_void_queue
+{
+	size_t	capacity;
+	size_t	size;
+	size_t	start;
+	void	**data;
+}				t_void_queue;
+
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
@@ -101,18 +116,16 @@ int				ft_strchr_pos(const char *str, int c);
 int				get_next_line(const int fd, char **line, int err);
 
 
-typedef struct	s_void_vector // need move to header file
-{
-	size_t	capacity;
-	size_t	size;
-	void	**data;
-}				t_void_vector;
+void			void_vector_free(t_void_vector *v_vector);
+int				void_vector_init(t_void_vector *v_vector);
+int				void_vector_push_back(t_void_vector *v_vector, void *v);
+void			*void_vector_pop_back(t_void_vector *v_vector);
 
-void	void_vector_free(t_void_vector *v_vector);
-int		void_vector_init(t_void_vector *v_vector);
-int		void_vector_push_back(t_void_vector *v_vector, void *v);
-void	*void_vector_pop_back(t_void_vector *v_vector);
-
+void			void_queue_free(t_void_queue *void_queue);
+int				void_queue_init(t_void_queue *int_queue);
+int 			resize_void_queue(t_void_queue *void_queue);
+int				t_void_queue_push(t_void_queue *void_queue, void *v);
+void			*void_queue_pop_back(t_void_queue *void_queue);
 
 
 #endif

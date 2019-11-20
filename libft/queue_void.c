@@ -12,15 +12,6 @@
 
 #include "libft.h"
 
-
-typedef struct	s_void_queue // need move to header file
-{
-	size_t	capacity;
-	size_t	size;
-	size_t	start;
-	void	**data;
-}				t_void_queue;
-
 void	void_queue_free(t_void_queue *void_queue)
 {
 	free(void_queue->data);
@@ -38,7 +29,7 @@ int		void_queue_init(t_void_queue *int_queue)
 }
 
 
-int resize_void_queue(t_void_queue *void_queue)
+int 	resize_void_queue(t_void_queue *void_queue)
 {
 	void		**new_data;
 
