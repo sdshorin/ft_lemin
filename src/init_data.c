@@ -26,6 +26,7 @@ t_data	*create_data_struct(void)
 	data->start = NULL;
 	data->end = NULL;
 	data->path = NULL; // ?
+	data->path_quantity = 0;
 	data->input_head = NULL;
 	data->input_tail = NULL;
 	data->sum_path_len = 0;
