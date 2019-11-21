@@ -37,24 +37,53 @@ void		add_start(t_queue *queue, t_room *start)
 
 //////////////// handle free nodes //////////////////////
 
-int make_recipe(t_recipe prev_recipe, t_room *room)
+int teleporte_step_back(t_room *prev_room, t_room *room, t_queue *queue)
 {
-	if (room->recipe.path_cost != -1 && prev_recipe.path_cost + 1 >= room->recipe.path_cost)
+	if (room->prev_on_path->recipe.path_cost != -1 && prev_room->recipe.path_cost >= room->prev_on_path->recipe.path_cost)
 		return (1);
 
-	// don't shure it's nessesary
-	// if (room->path_index > 0 && int_vector_is_int_in_vector(
-	// 		&prev_recipe.used_old_paths, room->path_index))
-	// 	return (1);
-	room->recipe.path_cost = prev_recipe.path_cost + 1;
-	int_vector_reset(&room->recipe.used_old_paths);
-	int_vector_copy(&room->recipe.used_old_paths, &prev_recipe.used_old_paths);
-	if (room->path_index > -1)
+	// room->prev_on_path->recipe_come_from  = room;
+	room->prev_on_path->recipe.path_cost = prev_room->recipe.path_cost;
+	int_vector_reset(&room->prev_on_path->recipe.used_old_paths);
+	int_vector_copy(&room->prev_on_path->recipe.used_old_paths, &prev_room->recipe.used_old_paths);
+	int_vector_push_back(&room->prev_on_path->recipe.used_old_paths, room->path_index);
+
+	void_vector_reset(&room->prev_on_path->recipe.start_old_path_room);
+	void_vector_copy(&room->prev_on_path->recipe.start_old_path_room, &prev_room->recipe.start_old_path_room);
+	void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room, prev_room);
+	void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room, room);
+	add_to_queue(queue, room->prev_on_path, room);
+
+	return (0);
+
+	// room->prev_on_path
+}
+
+
+
+int make_recipe(t_room *prev_room, t_room *room, t_queue *queue)
+{
+	if (room->path_index > -1 && prev_room->path_index != room->path_index)
 	{
-		room->recipe.step_back_on_path = 0;
-//		room->recipe.used_old_paths.push_back(room->path_index);
-		int_vector_push_back(&room->recipe.used_old_paths, room->path_index);
+		return teleporte_step_back(prev_room, room, queue);
 	}
+
+	if (room->recipe.path_cost != -1 && prev_room->recipe.path_cost + 1 >= room->recipe.path_cost)
+		return (1);
+
+	room->recipe.path_cost = prev_room->recipe.path_cost + 1;
+	int_vector_reset(&room->recipe.used_old_paths);
+	int_vector_copy(&room->recipe.used_old_paths, &prev_room->recipe.used_old_paths);
+	void_vector_reset(&room->recipe.start_old_path_room);
+	void_vector_copy(&room->recipe.start_old_path_room, &prev_room->recipe.start_old_path_room);
+	add_to_queue(queue, room, prev_room );
+
+// 	if (room->path_index > -1)
+// 	{
+// 		// room->recipe.step_back_on_path = 0;
+// //		room->recipe.used_old_paths.push_back(room->path_index);
+// 		int_vector_push_back(&room->recipe.used_old_paths, room->path_index);
+// 	}
 	return (0);
 }
 
@@ -67,8 +96,8 @@ void handle_ordinary_room(t_room *now_room, t_queue *queue)
 	v_vector = now_room->links.data;
 	while (i < now_room->links.size)
 	{
-		if (!make_recipe(now_room->recipe, (t_room *)v_vector[i]))
-			add_to_queue(queue, (t_room *)v_vector[i], now_room);
+		make_recipe(now_room, (t_room *)v_vector[i], queue);
+			// add_to_queue(queue, (t_room *)v_vector[i], now_room);
 		i++;
 	}
 }
@@ -79,22 +108,25 @@ void handle_ordinary_room(t_room *now_room, t_queue *queue)
 
 //////////////////////// handle node which was used on old path ///////////
 
-int		make_recipe_step_back(t_recipe prev_recipe, t_room *room)
+int		make_recipe_step_back(t_room *prev_room, t_room *room, t_queue *queue)
 {
-	if (room->recipe.path_cost != -1 && prev_recipe.path_cost - 1 >= room->recipe.path_cost)
+	if (room->recipe.path_cost != -1 && prev_room->recipe.path_cost - 1 >= room->recipe.path_cost)
 		return (1);
-	room->recipe.path_cost = prev_recipe.path_cost - 1;
-	room->recipe.step_back_on_path = 1;
+	room->recipe.path_cost = prev_room->recipe.path_cost - 1;
+	// room->recipe.step_back_on_path = 1;
 	int_vector_reset(&room->recipe.used_old_paths);
-	int_vector_copy(&room->recipe.used_old_paths, &prev_recipe.used_old_paths);
+	int_vector_copy(&room->recipe.used_old_paths, &prev_room->recipe.used_old_paths);
+	void_vector_reset(&room->recipe.start_old_path_room);
+	void_vector_copy(&room->recipe.start_old_path_room, &prev_room->recipe.start_old_path_room);
+	add_to_queue(queue, room, prev_room );
 	return (0);
 }
 
-int 	make_recipe_from_old_path(t_room *prev_room, t_room *room)
+int 	make_recipe_from_old_path(t_room *prev_room, t_room *room, t_queue *queue)
 {
 	if (prev_room->prev_on_path == room)
-		return make_recipe_step_back(prev_room->recipe, room);
-	return make_recipe(prev_room->recipe, room);
+		return make_recipe_step_back(prev_room, room, queue);
+	return make_recipe(prev_room, room, queue);
 }
 
 
@@ -103,20 +135,20 @@ void	handle_node_on_old_path(t_room	*now_room, t_queue *queue)
 	void	**v_vector;
 	size_t		i;
 
-	if (!now_room->recipe.step_back_on_path)
-	{
-		if (!make_recipe_step_back(now_room->recipe, now_room->prev_on_path))
-			add_to_queue(queue, now_room->prev_on_path, now_room);
-		return ;
-	}
+	// if (!now_room->recipe.step_back_on_path)
+	// {
+	// 	if (!make_recipe_step_back(now_room->recipe, now_room->prev_on_path))
+	// 		add_to_queue(queue, now_room->prev_on_path, now_room);
+	// 	return ;
+	// }
 	i = 0;
 	v_vector = now_room->links.data;
 	while (i < now_room->links.size)
 	{
 		if (((t_room*)v_vector[i]) != now_room->next_on_path)
 		{
-			if (!make_recipe_from_old_path(now_room, (t_room*)v_vector[i]))
-				add_to_queue(queue, (t_room*)v_vector[i], now_room);
+			make_recipe_from_old_path(now_room, (t_room*)v_vector[i], queue);
+				// add_to_queue(queue, room, prev_room );
 		}
 		i++;
 	}
@@ -152,7 +184,7 @@ int		find_new_way(t_data *data)
 		if (now_room == data->end)
 		{
 			if (data->path_quantity < 1)
-				return (-1);  //what do we have to return here ?
+				return (1);  //what do we have to return here ?
 			else
 				continue;
 		}
@@ -196,21 +228,25 @@ t_room	*back_with_rewrite_to_old_path(t_room *now_room, int path_index, t_room *
 	return (now_room);
 }
 
-/*
- * Why there is a path_index and *start in the following func?
- */
 
-t_room	*clear_part_of_old_path(t_room *now_room)
+t_room	*clear_part_of_old_path(t_room *now_room, t_void_vector *start_old_path_room)
 {
+	t_room *last_room_on_old_path;
+	t_room *first_free_node;
+
+
+	last_room_on_old_path = void_vector_pop_back(start_old_path_room);
+	first_free_node = void_vector_pop_back(start_old_path_room);
 	now_room = now_room->recipe_come_from;
-	while (now_room->recipe_come_from->path_index > -1)
+	while (now_room != last_room_on_old_path)
 	{
 		now_room->next_on_path = 0;
 		now_room->prev_on_path = 0;
-		now_room->path_index = -1; //maybe to path_index instead of -1?
+		now_room->path_index = -1;
 		now_room = now_room->recipe_come_from;
 	}
-	return (now_room);
+	first_free_node->next_on_path = last_room_on_old_path;
+	return (first_free_node);
 }
 
 void	make_new_way(t_data *data)
@@ -228,7 +264,7 @@ void	make_new_way(t_data *data)
 		now_room = back_with_rewrite_to_old_path(now_room, last_path, data->start);
 		if (now_room == data->start)
 			break ;
-		now_room = clear_part_of_old_path(now_room);
+		now_room = clear_part_of_old_path(now_room, &data->end->recipe.start_old_path_room);
 	}
 }
 ///////////// end make new ways from recipes //////////////

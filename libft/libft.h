@@ -134,10 +134,12 @@ int				int_vector_pop_back(t_int_vector *int_vector);
 
 void 			int_vector_copy(t_int_vector *dst, t_int_vector *src);
 
-#include <stdio.h>
+#include <stdio.h> // DELETE
 void int_vector_reset(t_int_vector *src);
 void int_vector_push_front(t_int_vector *int_vector, int new_num);
 void pint_void_vector(t_void_vector *v_vector);
+void void_vector_reset(t_void_vector *src);
+void 	void_vector_copy(t_void_vector *dst, t_void_vector *src);
 
 
 

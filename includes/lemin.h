@@ -30,6 +30,7 @@ typedef struct	s_recipe
 	int 			path_cost;
 	t_int_vector	used_old_paths;
 	int				step_back_on_path; // номер пути, по которому мы сделали обязательный шаг назад
+	t_void_vector	start_old_path_room;
 }				t_recipe;
 
 

@@ -73,3 +73,22 @@ void pint_void_vector(t_void_vector *v_vector)
 	}
 	printf("--------------\n");
 }
+
+void void_vector_reset(t_void_vector *src)
+{
+	src->size = 0;
+}
+
+void 	void_vector_copy(t_void_vector *dst, t_void_vector *src)
+{
+	size_t i;
+
+	void_vector_reset(dst);
+	i = 0;
+	while (i < src->size)
+	{
+		void_vector_push_back(dst, src->data[i]);
+		i++;
+	}
+}
+
