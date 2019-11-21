@@ -31,6 +31,12 @@ int		main(int argc, char **argv)
 	{
 		ft_putendl("Trying to read graph from file...");
 		data->fd = open(argv[1], O_RDONLY);
+		if (data->fd < 0 || read(data->fd, NULL, 0) < 0)
+		{
+			ft_putendl("Cannot open file specified in first arg!");
+			ft_putendl("Trying to read from stdin...");
+			data->fd = 0;
+		}
 	}
 	get_data(data);
 	if (data->start == data->end)
