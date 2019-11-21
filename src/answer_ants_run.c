@@ -56,14 +56,17 @@ void create_now_ants(int *ants, int *ant_index, t_ant** first_ant, t_room *start
 t_ant *delete_ant(t_ant *ant, t_ant **first_ant)
 {
 	t_ant* to_return;
-	if (ant->prev_ant)
+
+	if (ant == NULL)
+		return (NULL);
+	if (ant->prev_ant != NULL)
 		ant->prev_ant->next_ant = ant->next_ant;
 	to_return = ant->next_ant;
-	if (ant->next_ant)
+	if (ant->next_ant != NULL)
 		ant->next_ant->prev_ant = 0;
 	if (ant == *first_ant)
 		*first_ant = to_return;
-	free(ant);
+	ft_memdel((void **)&ant);
 	return (to_return);
 }
 
@@ -91,7 +94,6 @@ void move_now_ants(t_ant *ant, t_ant **first_ant, t_room *end)
 		ant->now_room = ant->now_room->next_on_path;
 		ant = ant->next_ant;
 	}
-	write(1, "\n", 1);
 }
 
 
@@ -106,5 +108,7 @@ void run_ants_print_answer(t_data *data)
 	{
 		create_now_ants(&data->ants, &ant_index, &first_ant, data->start);
 		move_now_ants(first_ant, &first_ant, data->end);
+		if (data->ants > 0 || first_ant)
+			write(1, "\n", 1);
 	}
 }

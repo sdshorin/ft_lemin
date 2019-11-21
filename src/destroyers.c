@@ -23,13 +23,11 @@ static void	destroy_rooms(t_data *data)
 	while (cur != NULL)
 	{
 		ft_strdel(&(cur->name));
-		// if (cur->links != NULL)
-		// 	free(cur->links);
-		// cur->links = NULL;
+		ft_memdel((void **)&cur->links.data);
+		ft_memdel((void **)&cur->recipe.used_old_paths.data);
 		prev = cur;
 		cur = cur->next;
-		free(prev);
-		prev = NULL;
+		ft_memdel((void **)&prev);
 	}
 }
 
@@ -46,8 +44,7 @@ static void	destroy_input(t_data *data)
 		ft_strdel(&(cur->str));
 		prev = cur;
 		cur = cur->next;
-		free(prev);
-		prev = NULL;
+		ft_memdel((void **)&prev);
 	}
 }
 
@@ -58,7 +55,6 @@ void		destroy_data(t_data *data)
 //		get_next_line(data->fd, NULL, -1);
 		destroy_rooms(data);
 		destroy_input(data);
-		free(data);
-		data = NULL;
+		ft_memdel((void **)&data);
 	}
 }

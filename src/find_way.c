@@ -21,7 +21,7 @@ void		add_start(t_queue *queue, t_room *start)
 	start->recipe.path_cost = 0;
 	i = 0;
 	v_vector = start->links.data;
-	pint_void_vector(&start->links);
+//	pint_void_vector(&start->links);
 	while (i < start->links.size)
 	{
 		if (((t_room*)v_vector[i])->path_index < 0)
@@ -184,7 +184,7 @@ int		find_new_way(t_data *data)
 		if (now_room == data->end)
 		{
 			if (data->path_quantity < 1)
-				return (1);  //what do we have to return here ?
+				break ;  //what do we have to return here ?
 			else
 				continue;
 		}
@@ -279,7 +279,7 @@ void count_new_max_path_cost(t_data *data)
 		data->sum_path_len += data->ants;
 	data->sum_path_len += data->end->recipe.path_cost;
 	data->max_path_cost = (data->sum_path_len / data->path_quantity);
-	if (data->sum_path_len & data->path_quantity)
+	if (data->sum_path_len && data->path_quantity)
 		data->max_path_cost += 1;
 }
 ////////////////// end count_new_max_path_cost

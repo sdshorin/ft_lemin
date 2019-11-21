@@ -74,7 +74,7 @@ typedef struct	s_data
 
 	int 		*path; // ?
 
-	size_t			path_quantity; // now quantity of path 
+	size_t		path_quantity; // now quantity of path
 	int			sum_path_len;
 	int			max_path_cost;
 
@@ -85,7 +85,7 @@ typedef struct	s_data
 	
 }				t_data;
 
-typedef struct s_ant
+typedef struct	s_ant
 {
 	t_room 			*now_room;
 	int				ant_index;
@@ -113,7 +113,7 @@ void			add_to_queue(t_queue *queue, t_room *room, t_room *come_from);
 t_room			*get_from_queue(t_queue *queue);
 
 int				lem_in_find_paths(t_data *data);
-void				run_ants_print_answer(t_data *data);
+void			run_ants_print_answer(t_data *data);
 
 
 #endif
