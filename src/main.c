@@ -41,8 +41,13 @@ int		main(int argc, char **argv)
 	get_data(data);
 	if (data->start == data->end)
 		error_handler("Error: start == end!", data);
-	display_input(data);
-	// display_debug_data(data);
+
+
+//	display_input(data);
+
+
+// display_debug_data(data);
+
 	lem_in_find_paths(data);
 	run_ants_print_answer(data);
 

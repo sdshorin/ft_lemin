@@ -101,7 +101,13 @@ void create_now_ants(t_data *data, int *ant_index, t_ant** first_ant, t_ant** la
 	{
 		if (((t_room*)v_vector[i])->path_index >= 0)
 		{
+			if (((t_room *)v_vector[i])->recipe.path_cost > data->max_path_cost)
+			{
+				i++;
+				continue;
+			}
 			make_ant(*ant_index, first_ant, ((t_room*)v_vector[i]), last_ant);
+			((t_room *)v_vector[i])->recipe.path_cost++;
 			(*ant_index)++;
 			data->ants--;
 		}
