@@ -40,5 +40,7 @@ t_room	*get_from_queue(t_queue *queue)
 	}
 	to_return = queue->start;
 	queue->start = queue->start->next_in_queue;
+	to_return->prev_in_queue = 0;
+	to_return->next_in_queue = 0;
 	return (to_return);
 }
