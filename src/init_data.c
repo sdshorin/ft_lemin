@@ -30,5 +30,6 @@ t_data	*create_data_struct(void)
 	data->input_head = NULL;
 	data->input_tail = NULL;
 	data->sum_path_len = 0;
+	data->add_direct_path = 0;
 	return (data);
 }
