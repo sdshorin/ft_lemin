@@ -36,6 +36,8 @@ void write_to_recipte_path_len(t_room *room)
 
 	i = 0;
 	now_room = room;
+	if (room->path_index < 0)
+		return ;
 	while (now_room)
 	{
 		i++;
@@ -52,7 +54,10 @@ void set_all_path_len(t_data *data)
 	v_vector = data->start->links.data;
 	while (i < data->start->links.size)
 	{
-		write_to_recipte_path_len((t_room*)v_vector[i]);
+		if (((t_room*)v_vector[i])->path_index >  -1)
+			write_to_recipte_path_len((t_room*)v_vector[i]);
+		else
+			((t_room*)v_vector[i])->recipe.path_cost = -1;
 		i++;
 	}
 }
@@ -101,7 +106,7 @@ void create_now_ants(t_data *data, int *ant_index, t_ant** first_ant, t_ant** la
 	{
 		if (((t_room*)v_vector[i])->path_index >= 0)
 		{
-			if (((t_room *)v_vector[i])->recipe.path_cost > data->max_path_cost)
+			if (((t_room *)v_vector[i])->recipe.path_cost >= data->max_path_cost + 2)
 			{
 				i++;
 				continue;

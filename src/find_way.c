@@ -278,9 +278,10 @@ void count_new_max_path_cost(t_data *data)
 	if (data->sum_path_len == 0)
 		data->sum_path_len += data->ants;
 	data->sum_path_len += data->end->recipe.path_cost;
-	data->max_path_cost = (data->sum_path_len / data->path_quantity);
-	if (data->sum_path_len && data->path_quantity)
+	data->max_path_cost = (data->sum_path_len / data->path_quantity) - 2;
+	if (data->sum_path_len % data->path_quantity)
 		data->max_path_cost += 1;
+	printf("max path cost = %d\n", data->max_path_cost);
 }
 ////////////////// end count_new_max_path_cost
 
