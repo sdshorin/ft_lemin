@@ -3,7 +3,7 @@
 //
 
 #include "lemin.h"
-
+/*
 t_room		*get_queued(t_queue *queue)
 {
 	t_room	*room;
@@ -66,5 +66,7 @@ t_recipe	*bfs(t_data *data)
 	data->start->level = 0;
 	current = data->start;
 	current->recipe = create_recipe(NULL, current);
-
+	STOP HERE
 }
+
+*/

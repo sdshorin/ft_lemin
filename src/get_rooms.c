@@ -12,7 +12,33 @@
 
 #include "lemin.h"
 
-static int		get_room_params(char *str, t_room *room)
+static void		init_room(t_room *room)
+{
+	room->next = NULL;
+	room->level = 0;
+	room->q_links = 0;
+	room->recipe.path_cost = -1;
+	room->recipe.step_back_on_path = 0;
+	room->path_index = -1;
+	room->next_in_queue = 0;
+	room->prev_in_queue = 0;
+	room->next_on_path = 0;
+	room->recipe_come_from = 0;
+	int_vector_init(&room->recipe.used_old_paths);
+	void_vector_init(&room->recipe.start_old_path_room);
+	void_vector_init(&room->links);
+	// room->links = NULL;
+}
+
+static t_room	*del_room(t_room *room)
+{
+	if (room->name != NULL)
+		ft_strdel(&(room->name));
+	free(room);
+	return (NULL);
+}
+
+static int		get_room_params(char *str, t_room *room) //, t_data *data)
 {
 	int		name_len;
 	int		num_len;
@@ -40,14 +66,6 @@ static int		get_room_params(char *str, t_room *room)
 	return (0);
 }
 
-static t_room	*del_room(t_room *room)
-{
-	if (room->name != NULL)
-		ft_strdel(&(room->name));
-	free(room);
-	return (NULL);
-}
-
 static t_room	*create_room(char *str, t_data *data)
 {
 	t_room	*room;
@@ -56,22 +74,16 @@ static t_room	*create_room(char *str, t_data *data)
 	if ((room = (t_room *)malloc(sizeof(t_room))) == NULL)
 		return (NULL);
 	if ((get_room_params(str, room)) == -1)
-	{
 		return (del_room(room));
-	}
 	validate = data->first;
 	while (validate != NULL)
 	{
 		if (ft_strequ(validate->name, room->name) == 1)
-			return (del_room(room)); // Здесь не должно выводиться сообщение об ошибке?
+			return (del_room(room));
 		validate = validate->next;
 	}
-	room->next = NULL;
-	room->level = 0;
-	room->q_links = 0;
+	init_room(room);
 	room->index = data->q_rooms++;
-	room->recipe = 0;
-	room->links = NULL;
 
 	return (room);
 }
@@ -89,7 +101,7 @@ void			get_room(char *str, t_data *data, int *comm)
 	else
 	{
 		while (last->next != NULL)
-			last = last->next; // может, так же использовать last->tail, как с get_input?
+			last = last->next;
 		last->next = create_room(str, data);
 		last = last->next;
 	}

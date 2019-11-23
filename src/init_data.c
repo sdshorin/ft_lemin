@@ -18,13 +18,18 @@ t_data	*create_data_struct(void)
 
 	if ((data = (t_data *)malloc(sizeof(t_data))) == NULL)
 		error_handler("Allocation error in create_data!", NULL);
+	data->fd = 0;
 	data->ants = -1;
+	data->path_quantity = 0;
 	data->q_rooms = 0;
 	data->first = NULL;
 	data->start = NULL;
 	data->end = NULL;
 	data->path = NULL; // ?
+	data->path_quantity = 0;
 	data->input_head = NULL;
 	data->input_tail = NULL;
+	data->sum_path_len = 0;
+	data->add_direct_path = 0;
 	return (data);
 }

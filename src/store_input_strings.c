@@ -47,8 +47,8 @@ void			display_input(t_data *data)
 	input = data->input_head;
 	while (input != NULL)
 	{
-		ft_putendl(input->str);
+		ft_putendl_fd(input->str, 1);
 		input = input->next;
 	}
-	ft_putendl("");
+	write(1, "\n", 1);
 }
