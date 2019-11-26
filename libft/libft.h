@@ -126,6 +126,7 @@ void			void_vector_free(t_void_vector *v_vector);
 int				void_vector_init(t_void_vector *v_vector);
 int				void_vector_push_back(t_void_vector *v_vector, void *v);
 void			*void_vector_pop_back(t_void_vector *v_vector);
+int				void_vector_search(t_void_vector *haystack, void *needle);
 
 void			int_vector_free(t_int_vector *int_vector);
 int				int_vector_init(t_int_vector *int_vector);

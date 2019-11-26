@@ -27,6 +27,22 @@ int		void_vector_init(t_void_vector *v_vector)
 	return (0);
 }
 
+int		void_vector_search(t_void_vector *haystack, void *needle)
+{
+	int		i;
+	int		size;
+
+	i = 0;
+	size = haystack->size;
+	while (i < size)
+	{
+		if (haystack->data[i] == needle)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
 int		void_vector_push_back(t_void_vector *v_vector, void *v)
 {
 	void	**new_data;

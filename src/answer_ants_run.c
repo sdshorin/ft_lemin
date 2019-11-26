@@ -5,7 +5,8 @@
 
 
 
-void make_ant(int ant_index, t_ant **first_ant, t_room *next_room, t_ant **last_ant)
+void make_ant(int ant_index, t_ant **first_ant, t_room *next_room,
+		t_ant **last_ant)
 {
 	t_ant *now_ant;
 	
@@ -77,7 +78,7 @@ void sort_paths(t_data *data)
 {
 	size_t	i;
 	size_t	j;
-	void **v_vector;
+	void	**v_vector;
 
 	i = 0;
 	set_all_path_len(data);
@@ -87,7 +88,8 @@ void sort_paths(t_data *data)
 		j = i;
 		while (j < data->start->links.size)
 		{
-			if (((t_room*)v_vector[i])->recipe.path_cost > ((t_room*)v_vector[j])->recipe.path_cost)
+			if (((t_room*)v_vector[i])->recipe.path_cost >
+					((t_room*)v_vector[j])->recipe.path_cost)
 				swap_void_vector(v_vector, i, j);
 			j++;
 		}
@@ -95,32 +97,30 @@ void sort_paths(t_data *data)
 	}
 }
 
-// void create_now_ants(t_data *data, int *ant_index, t_ant** first_ant, t_room *start)
-void create_now_ants(t_data *data, int *ant_index, t_ant** first_ant, t_ant** last_ant)
+void create_now_ants(t_data *data, int *ant_index, t_ant** first_ant,
+		t_ant** last_ant)
 {
 	size_t	i;
-	void **v_vector;
+	void	**v_vector;
+	t_room	*now;
+
 	if (data->ants <= 0)
 		return ;
 	i = 0;
 	v_vector = data->start->links.data;
 	while (i < data->start->links.size && data->ants > 0)
 	{
-		t_room *now= v_vector[i];
-		if (((t_room*)v_vector[i])->path_index >= 0 || ((t_room*)v_vector[i]) == data->end)
+		now = v_vector[i];
+		if (now->path_index >= 0 || now == data->end)
 		{
-			if (((t_room *)v_vector[i])->recipe.path_cost >= data->max_path_cost + 2)
-			{
-				i++;
+			if (now->recipe.path_cost >= data->max_path_cost + 2 && i++)
 				continue;
-			}
-			make_ant(*ant_index, first_ant, ((t_room*)v_vector[i]), last_ant);
-			if (((t_room*)v_vector[i]) != data->end)
+			make_ant(*ant_index, first_ant, now, last_ant);
+			if (now != data->end)
 				((t_room *)v_vector[i])->recipe.path_cost++;
 			(*ant_index)++;
 			data->ants--;
 		}
-		now = 0;
 		i++;
 	}	
 }
@@ -146,7 +146,7 @@ t_ant *delete_ant(t_ant *ant, t_ant **first_ant, t_ant **last_ant)
 
 void move_now_ants(t_ant **first_ant, t_ant **last_ant) //, t_room *end)
 {
-	int need_whitespace;
+	int		need_whitespace;
 	t_ant	*ant;
 
 	ant = *first_ant;
