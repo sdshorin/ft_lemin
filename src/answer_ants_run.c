@@ -30,10 +30,10 @@ void make_ant(int ant_index, t_ant **first_ant, t_room *next_room,
 	
 }
 
-void write_to_recipte_path_len(t_room *room)
+void write_to_recipe_path_len(t_room *room)
 {
-	t_room *now_room;
-	int i;
+	t_room	*now_room;
+	int		i;
 
 	i = 0;
 	now_room = room;
@@ -49,14 +49,15 @@ void write_to_recipte_path_len(t_room *room)
 
 void set_all_path_len(t_data *data)
 {
-		size_t	i;
-	void **v_vector;
+	size_t	i;
+	void	**v_vector;
+
 	i = 0;
 	v_vector = data->start->links.data;
 	while (i < data->start->links.size)
 	{
 		if (((t_room*)v_vector[i])->path_index >  -1)
-			write_to_recipte_path_len((t_room*)v_vector[i]);
+			write_to_recipe_path_len((t_room*)v_vector[i]);
 		else if (((t_room*)v_vector[i]) == data->end)
 			((t_room*)v_vector[i])->recipe.path_cost = 1;
 		else

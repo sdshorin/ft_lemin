@@ -18,7 +18,7 @@ static void		init_room(t_room *room)
 	room->level = 0;
 	room->q_links = 0;
 	room->recipe.path_cost = -1;
-	room->recipe.step_back_on_path = 0;
+//	room->recipe.step_back_on_path = 0;
 	room->path_index = -1;
 	room->next_in_queue = 0;
 	room->prev_in_queue = 0;

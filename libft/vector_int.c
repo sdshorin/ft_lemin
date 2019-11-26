@@ -30,6 +30,11 @@ int		int_vector_init(t_int_vector *int_vector)
 	return (0);
 }
 
+void int_vector_reset(t_int_vector *src)
+{
+	src->size = 0;
+}
+
 int		int_vector_push_back(t_int_vector *int_vector, int i)
 {
 	int		*new_data;
@@ -74,16 +79,12 @@ void 	int_vector_copy(t_int_vector *dst, t_int_vector *src)
 	}
 }
 
-void int_vector_reset(t_int_vector *src)
-{
-	src->size = 0;
-}
-
 void int_vector_push_front(t_int_vector *int_vector, int new_num)
 {
-	int last_elem;
-	size_t i;
-	if (int_vector->size  > 0)
+	int		last_elem;
+	size_t	i;
+
+	if (int_vector->size > 0)
 	{
 		i = 0;
 		last_elem = int_vector->data[int_vector->size - 1];

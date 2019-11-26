@@ -5,8 +5,8 @@
 get_max_way(now_path_quantity):
 	static int max_way
 	static pas_quantity
-	if (now_path_quantity > pas_quantity):
-		max_way = count_max_wat()
+	if (now_path_quantity > path_quantity):
+		max_way = count_max_way()
 	return max_way
 
 
@@ -25,7 +25,7 @@ finish_recipe = []
 
 
 func find_new_way():
-	t_stacK stack;
+	t_stack stack;
 	make_start_recipe(start)
 	for connection_node in start:
 		if not connection_node.is_used_in_any_path():
@@ -37,9 +37,9 @@ func find_new_way():
 		if not can_we_use_this_node(t_node):
 			continue
 		if t_node is finish:
-			finish_recipe.pueh_back(t_node)
+			finish_recipe.push_back(t_node)
 			continue
-		if t_node.recipe.is_firt_on_old_path:
+		if t_node.recipe.is_first_on_old_path:
 			t_node_next = t_node.prev_old_path
 			stack.add(t_node_next)
 			make_recipe_back_on_old_path(t_node, connection)
@@ -57,9 +57,9 @@ func find_new_way():
 				stack.add(connection)
 	
 	if !finish_recipe.size():
-		return null # stop wuile in func start() 
-	win_recipe = find_finisf_recipe_with_min_cost()
-	retun win_recipe
+		return null # stop while in func start()
+	win_recipe = find_finish_recipe_with_min_cost()
+	return win_recipe
 
 		
 
