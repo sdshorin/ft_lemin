@@ -114,7 +114,7 @@ void			add_to_queue(t_queue *queue, t_room *room, t_room *come_from);
 t_room			*get_from_queue(t_queue *queue);
 
 int				lem_in_find_paths(t_data *data);
-void			run_ants_print_answer(t_data *data);
+void			run_ants_print_answer(t_data *data, char direct);
 
 
 void count_new_max_path_cost(t_data *data, int is_adding_direct_path);
