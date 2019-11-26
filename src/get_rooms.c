@@ -23,6 +23,8 @@ static void		init_room(t_room *room)
 	room->next_in_queue = 0;
 	room->prev_in_queue = 0;
 	room->next_on_path = 0;
+	// room->is_finish = 0;
+	// room->is_start = 0;
 	room->recipe_come_from = 0;
 	int_vector_init(&room->recipe.used_old_paths);
 	void_vector_init(&room->recipe.start_old_path_room);
@@ -83,6 +85,37 @@ static t_room	*create_room(char *str, t_data *data)
 		validate = validate->next;
 	}
 	init_room(room);
+
+	// if (room->x == 4408)
+	// 	data->room4408 = room;
+	// else if (room->x == 6094)
+	// 	data->room6094 = room;
+	// else if (room->x == 9114)
+	// 	data->room9114 = room;
+	// else if (room->x == 6098)
+	// 	data->room6098 = room;
+	// else if (room->x == 6092)
+	// 	data->room6092 = room;
+	// else if (room->x == 7187)
+	// 	data->room7187 = room;
+	// else if (room->x == 6344)
+	// 	data->room6344 = room;
+	// else if (room->x == 4577)
+	// 	data->room4577 = room;
+	// else if (room->x == 8970)
+	// 	data->room8970 = room;
+	// else if (room->x == 6128)
+	// 	data->room6128 = room;
+	// else if (room->x == 7352)
+	// 	data->room7352 = room;
+	// else if (room->x == 7400)
+	// 	data->room7400 = room;
+	// else if (room->x == 8905)
+	// 	data->room8905 = room;
+
+
+
+
 	room->index = data->q_rooms++;
 
 	return (room);

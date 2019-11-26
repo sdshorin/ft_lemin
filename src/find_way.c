@@ -48,6 +48,8 @@ int teleporte_step_back(t_room *prev_room, t_room *room, t_queue *queue)
 		return (1);
 
 	// room->prev_on_path->recipe_come_from  = room;
+	// if (room->prev_on_path->is_start)
+	// 	return (0);
 	room->prev_on_path->recipe.path_cost = prev_room->recipe.path_cost;
 	int_vector_reset(&room->prev_on_path->recipe.used_old_paths);
 	int_vector_copy(&room->prev_on_path->recipe.used_old_paths, &prev_room->recipe.used_old_paths);
@@ -213,6 +215,8 @@ int		find_new_way(t_data *data)
 	while (queue.start)
 	{
 		now_room = get_from_queue(&queue);
+		// if (now_room->index == 4028 && data->path_quantity == 12)
+		// 	printf("-.-\n");
 		if ((now_room->recipe.path_cost > data->max_path_cost && data->max_path_cost >= 0 )|| now_room == data->start)
 			continue ;
 		if (now_room == data->end)
@@ -245,14 +249,21 @@ void	rename_old_path(t_room *now_room, int path_index, t_room *end)
 
 t_room	*back_with_rewrite_to_old_path(t_room *now_room, int path_index, t_room *start)
 {
+	// if (now_room->index == 4028)
+		printf("find it");
 	now_room->prev_on_path = now_room->recipe_come_from;
 	now_room->recipe_come_from->next_on_path = now_room;
 	now_room = now_room->recipe_come_from;
 	while (now_room->path_index < 0 && now_room != start)
 	{
+		// if (now_room->index == 4028)
+		// 	printf("find it");
+		// if (now_room->recipe_come_from == now_room->next_on_path)
 		now_room->path_index = path_index;
 		now_room->prev_on_path = now_room->recipe_come_from;
 		now_room->recipe_come_from->next_on_path = now_room;
+		// if (now_room->recipe_come_from->next_on_path == now_room->recipe_come_from->prev_on_path)
+		// 	printf("find it!\n");
 		now_room = now_room->recipe_come_from;
 	}
 	return (now_room);
@@ -263,18 +274,25 @@ t_room	*clear_part_of_old_path(t_room *now_room, t_void_vector *start_old_path_r
 {
 	t_room *last_room_on_old_path;
 	t_room *first_free_node;
+	// t_room *next_room;
 
-
+// if (!now_room->recipe_come_from)
+// 			printf("find!\n");
 	last_room_on_old_path = void_vector_pop_back(start_old_path_room);
 	first_free_node = void_vector_pop_back(start_old_path_room);
 	now_room = now_room->recipe_come_from;
 	while (now_room != last_room_on_old_path)
 	{
+		// next_room = now_room->next_on_path;
 		now_room->next_on_path = 0;
 		now_room->prev_on_path = 0;
 		now_room->path_index = -1;
+		// if (!next_room->recipe_come_from)
+		// 	printf("find!\n");
+		// now_room = next_room;
 		now_room = now_room->recipe_come_from;
 	}
+	last_room_on_old_path->prev_on_path = first_free_node;
 	first_free_node->next_on_path = last_room_on_old_path;
 	return (first_free_node);
 }
@@ -330,6 +348,7 @@ void reset_all_room(t_data *data)
 	{
 		now_room->prev_in_queue = 0;
 		now_room->next_in_queue = 0;
+		now_room->recipe_come_from = 0;
 		now_room->recipe.path_cost = -1;
 		int_vector_reset(&now_room->recipe.used_old_paths);
 		void_vector_reset(&now_room->recipe.start_old_path_room);
@@ -352,6 +371,8 @@ int lem_in_find_paths(t_data *data)
 	data->max_path_cost = -1;
 	while (find_new_way(data))
 	{
+		// if (data->path_quantity == 5)
+		// 	printf("find.\n");
 		make_new_way(data);
 		count_new_max_path_cost(data, 0);
 		reset_all_room(data);
