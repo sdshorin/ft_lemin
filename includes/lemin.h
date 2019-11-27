@@ -117,6 +117,6 @@ int				lem_in_find_paths(t_data *data);
 void			run_ants_print_answer(t_data *data);
 
 
-void count_new_max_path_cost(t_data *data, int is_adding_direct_path);
+void count_new_max_path_cost(t_data *data);
 
 #endif
