@@ -284,7 +284,7 @@ t_room	*clear_part_of_old_path(t_room *now_room, t_void_vector *start_old_path_r
 	last_room_on_old_path = void_vector_pop_back(start_old_path_room);
 	first_free_node = void_vector_pop_back(start_old_path_room);
 	now_room = now_room->recipe_come_from;
-	while (now_room != NULL && now_room != last_room_on_old_path)
+	while (now_room != last_room_on_old_path)
 	{
 		// next_room = now_room->next_on_path;
 		now_room->next_on_path = 0;

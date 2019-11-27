@@ -46,7 +46,7 @@ int		main(int argc, char **argv)
 		error_handler("Error: start == end!", data);
 
 
-//	display_input(data);
+	display_input(data);
 
 
 // display_debug_data(data);
