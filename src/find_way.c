@@ -251,7 +251,9 @@ void	rename_old_path(t_room *now_room, int path_index, t_room *end)
 t_room	*back_with_rewrite_to_old_path(t_room *now_room, int path_index, t_room *start)
 {
 	// if (now_room->index == 4028)
-//		printf("find it");
+		// printf("find it");
+	// if (now_room->path_index > -1)
+	// 	return (now_room);
 	now_room->prev_on_path = now_room->recipe_come_from;
 	now_room->recipe_come_from->next_on_path = now_room;
 	now_room = now_room->recipe_come_from;
@@ -310,7 +312,8 @@ void	make_new_way(t_data *data)
 	{
 		last_path = int_vector_pop_back(&data->end->recipe.used_old_paths);
 		rename_old_path(now_room, last_path, data->end);
-		now_room = back_with_rewrite_to_old_path(now_room, last_path, data->start);
+		if (!data->end->recipe.start_old_path_room.size || ((t_room*)data->end->recipe.start_old_path_room.data[data->end->recipe.start_old_path_room.size - 1])->prev_on_path != now_room)
+			now_room = back_with_rewrite_to_old_path(now_room, last_path, data->start);
 		if (now_room == data->start)
 			break ;
 		now_room = clear_part_of_old_path(now_room, &data->end->recipe.start_old_path_room);
@@ -372,7 +375,7 @@ int lem_in_find_paths(t_data *data)
 	data->max_path_cost = -1;
 	while (find_new_way(data))
 	{
-		// if (data->path_quantity == 5)
+		// if (data->path_quantity == 6)
 		// 	printf("find.\n");
 		make_new_way(data);
 		count_new_max_path_cost(data, 0);
