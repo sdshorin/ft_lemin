@@ -29,13 +29,7 @@ void	lem_in_main(t_data *data)
 	if (ft_void_vector_search(&(data->start->links), data->end) >= 0)
 		handle_direct_path(data);
 	else
-	{
-		lem_in_find_paths(data);
-		if (data->path_quantity == 0)
-			error_handler("Error: no path!!", data);
-		else
-			run_ants_print_answer(data);
-	}
+		run_ants_print_answer(data);
 }
 
 int		main(int argc, char **argv)
@@ -57,6 +51,9 @@ int		main(int argc, char **argv)
 	get_data(data);
 	if (data->start == data->end)
 		error_handler("Error: start == end!", data);
+	lem_in_find_paths(data);
+	if (data->path_quantity == 0)
+		error_handler("Error: no path!!", data);
 	display_input(data);
 	lem_in_main(data);
 	destroy_data(data);
