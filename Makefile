@@ -11,8 +11,10 @@ INC_DIR = ./includes/
 LIBFT_DIR = ./libft/
 LFT = -L $(LIBFT_DIR) -lft
 
-SRCS_LIST = main.c find_way.c answer_ants_run.c destroyers.c get_ants.c get_data.c get_links.c \
-get_rooms.c init_data.c store_input_strings.c queue.c
+SRCS_LIST = main.c destroyers.c get_ants.c get_data.c get_links.c \
+get_rooms.c init_data.c store_input_strings.c queue.c 	algo_find_new_way.c \
+algo_find_way.c algo_make_new_way.c algo_recipe.c output_ants.c \
+output_ants_run.c output_path_sort.c
 HEADERS_LIST = lemin.h
 
 SRCS = $(addprefix $(SRC_DIR),$(SRCS_LIST))

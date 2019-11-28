@@ -15,7 +15,6 @@
 
 void	error_handler(char *message, t_data *data)
 {
-//	get_next_line(data->fd, NULL);
 	if (data != NULL)
 	{
 		get_next_line(data->fd, NULL);
@@ -23,6 +22,20 @@ void	error_handler(char *message, t_data *data)
 	}
 	ft_putendl_fd(message, 2);
 	exit(1);
+}
+
+void	lem_in_main(t_data *data)
+{
+	if (void_vector_search(&(data->start->links), data->end) >= 0)
+		handle_direct_path(data);
+	else
+	{
+		lem_in_find_paths(data);
+		if (data->path_quantity == 0)
+			error_handler("Error: no path!!", data);
+		else
+			run_ants_print_answer(data);
+	}
 }
 
 int		main(int argc, char **argv)
@@ -44,19 +57,8 @@ int		main(int argc, char **argv)
 	get_data(data);
 	if (data->start == data->end)
 		error_handler("Error: start == end!", data);
-
-
 	display_input(data);
-
-
-// display_debug_data(data);
-	if (ft_void_vector_search(&(data->start->links), data->end) >= 0)
-		run_ants_print_answer(data, '1');
-	else
-	{
-		lem_in_find_paths(data);
-		run_ants_print_answer(data, '0');
-	}
+	lem_in_main(data);
 	destroy_data(data);
 	return (0);
 }

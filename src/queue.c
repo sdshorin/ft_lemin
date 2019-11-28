@@ -1,6 +1,14 @@
-//
-// Created by Katharine Psylocke on 20/11/2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   queue.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjesse <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/28 19:48:23 by bjesse            #+#    #+#             */
+/*   Updated: 2019/11/28 19:48:25 by bjesse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lemin.h"
 
@@ -12,9 +20,9 @@ void	init_queue(t_queue *queue)
 
 void	add_to_queue(t_queue *queue, t_room *room, t_room *come_from)
 {
-	room->recipe_come_from  = come_from;
+	room->recipe_come_from = come_from;
 	if (room->prev_in_queue || room->next_in_queue)
-		return ; //already in queue; don't care about order
+		return ;
 	if (!queue->start)
 	{
 		queue->finish = room;

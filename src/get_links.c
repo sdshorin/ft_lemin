@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-static t_room	*match_name(char *name, t_room *room) //, t_data *data)
+static t_room	*match_name(char *name, t_room *room)
 {
 	while (room != NULL)
 	{
