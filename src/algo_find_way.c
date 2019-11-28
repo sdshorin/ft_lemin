@@ -1,14 +1,18 @@
-
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_find_way.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjesse <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/28 19:32:39 by bjesse            #+#    #+#             */
+/*   Updated: 2019/11/28 19:33:13 by bjesse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lemin.h"
 
-
-
-
-
-void count_new_max_path_cost(t_data *data)
+void	count_new_max_path_cost(t_data *data)
 {
 	data->path_quantity += 1;
 	if (data->sum_path_len == 0)
@@ -19,9 +23,9 @@ void count_new_max_path_cost(t_data *data)
 		data->max_path_cost += 1;
 }
 
-void reset_paths(t_data *data)
+void	reset_paths(t_data *data)
 {
-	t_room *now_room;
+	t_room	*now_room;
 
 	now_room = data->first;
 	while (now_room)
@@ -42,12 +46,11 @@ void reset_paths(t_data *data)
 	data->start->path_index = -1;
 }
 
-
-int lem_in_find_paths(t_data *data)
+int		lem_in_find_paths(t_data *data)
 {
 	data->max_path_cost = -1;
 	while (find_new_way(data))
-	{ 
+	{
 		make_new_way(data);
 		count_new_max_path_cost(data);
 		reset_paths(data);
