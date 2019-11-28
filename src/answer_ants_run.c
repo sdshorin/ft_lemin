@@ -66,6 +66,22 @@ void set_all_path_len(t_data *data)
 	}
 }
 
+
+// void count_paths(t_data *data)
+// {
+// 		size_t	i;
+// 	void **v_vector;
+// 	i = 0;
+// 	int sum =0;
+// 	v_vector = data->start->links.data;
+// 	while (i < data->start->links.size)
+// 	{
+// 		if (((t_room*)v_vector[i])->path_index >  -1)
+// 		sum += 	((t_room*)v_vector[i])->recipe.path_cost;
+// 		i++;
+// 	}
+// }
+
 void swap_void_vector(void **v_vector, size_t i, size_t j)
 {
 	void *temp;
@@ -132,7 +148,7 @@ void create_now_ants(t_data *data, int *ant_index, t_ant** first_ant,
 				continue;
 			make_ant(*ant_index, first_ant, now, last_ant);
 			if (now != data->end)
-				((t_room *)v_vector[i])->recipe.path_cost++;
+				now->recipe.path_cost++;
 			(*ant_index)++;
 			data->ants--;
 		}
