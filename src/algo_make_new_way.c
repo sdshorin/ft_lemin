@@ -42,8 +42,8 @@ t_room	*clear_old_path(t_room *now_room, t_void_vector *start_old_path_room)
 	t_room	*first_node_to_clear;
 	t_room	*next_room;
 
-	last_room_on_old_path = void_vector_pop_back(start_old_path_room);
-	first_free_node = void_vector_pop_back(start_old_path_room);
+	last_room_on_old_path = ft_void_vector_pop_back(start_old_path_room);
+	first_free_node = ft_void_vector_pop_back(start_old_path_room);
 	first_node_to_clear = now_room->prev_on_path->next_on_path;
 	now_room->prev_on_path->next_on_path = now_room;
 	now_room = first_node_to_clear;
@@ -65,11 +65,11 @@ void	make_new_way(t_data *data)
 	t_room	*now_room;
 
 	now_room = data->end;
-	int_vector_push_front(&data->end->recipe.used_old_paths,
+	ft_int_vector_push_front(&data->end->recipe.used_old_paths,
 					data->path_quantity);
 	while (data->end->recipe.used_old_paths.size > 0)
 	{
-		last_path = int_vector_pop_back(&data->end->recipe.used_old_paths);
+		last_path = ft_int_vector_pop_back(&data->end->recipe.used_old_paths);
 		rename_old_path(now_room, last_path, data->end);
 		now_room = create_new_path(now_room, last_path, data->start);
 		if (now_room == data->start)

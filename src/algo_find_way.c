@@ -34,8 +34,8 @@ void	reset_paths(t_data *data)
 		now_room->next_in_queue = 0;
 		now_room->recipe_come_from = 0;
 		now_room->recipe.path_cost = -1;
-		int_vector_reset(&now_room->recipe.used_old_paths);
-		void_vector_reset(&now_room->recipe.start_old_path_room);
+		ft_int_vector_reset(&now_room->recipe.used_old_paths);
+		ft_void_vector_reset(&now_room->recipe.start_old_path_room);
 		now_room = now_room->next;
 	}
 	data->end->prev_on_path = 0;

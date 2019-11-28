@@ -23,9 +23,9 @@ static void		init_room(t_room *room)
 	room->prev_in_queue = 0;
 	room->next_on_path = 0;
 	room->recipe_come_from = 0;
-	int_vector_init(&room->recipe.used_old_paths);
-	void_vector_init(&room->recipe.start_old_path_room);
-	void_vector_init(&room->links);
+	ft_int_vector_init(&room->recipe.used_old_paths);
+	ft_void_vector_init(&room->recipe.start_old_path_room);
+	ft_void_vector_init(&room->links);
 }
 
 static t_room	*del_room(t_room *room)

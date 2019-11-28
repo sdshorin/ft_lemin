@@ -26,7 +26,7 @@ void	error_handler(char *message, t_data *data)
 
 void	lem_in_main(t_data *data)
 {
-	if (void_vector_search(&(data->start->links), data->end) >= 0)
+	if (ft_void_vector_search(&(data->start->links), data->end) >= 0)
 		handle_direct_path(data);
 	else
 	{

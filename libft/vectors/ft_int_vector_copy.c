@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../libft.h"
 
 void	ft_int_vector_copy(t_int_vector *dst, t_int_vector *src)
 {
