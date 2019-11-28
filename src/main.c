@@ -15,9 +15,12 @@
 
 void	error_handler(char *message, t_data *data)
 {
-	get_next_line(data->fd, NULL);
+//	get_next_line(data->fd, NULL);
 	if (data != NULL)
+	{
+		get_next_line(data->fd, NULL);
 		destroy_data(data);
+	}
 	ft_putendl_fd(message, 2);
 	exit(1);
 }
@@ -43,14 +46,17 @@ int		main(int argc, char **argv)
 		error_handler("Error: start == end!", data);
 
 
-//	display_input(data);
+	display_input(data);
 
 
 // display_debug_data(data);
-
-	lem_in_find_paths(data);
-	run_ants_print_answer(data);
-
+	if (void_vector_search(&(data->start->links), data->end) >= 0)
+		run_ants_print_answer(data, '1');
+	else
+	{
+		lem_in_find_paths(data);
+		run_ants_print_answer(data, '0');
+	}
 	destroy_data(data);
 	return (0);
 }

@@ -29,7 +29,8 @@ typedef struct	s_recipe
 {
 	int 			path_cost;
 	t_int_vector	used_old_paths;
-	int				step_back_on_path; // номер пути, по которому мы сделали обязательный шаг назад
+//	int				step_back_on_path; // номер пути, по которому мы сделали
+// обязательный шаг назад
 	t_void_vector	start_old_path_room;
 }				t_recipe;
 
@@ -72,7 +73,7 @@ typedef struct	s_data
 	t_room 		*start;
 	t_room		*end;
 
-	int 		*path; // ?
+//	int 		*path; // ?
 
 	size_t		path_quantity; // now quantity of path
 	int			sum_path_len;
@@ -114,7 +115,7 @@ void			add_to_queue(t_queue *queue, t_room *room, t_room *come_from);
 t_room			*get_from_queue(t_queue *queue);
 
 int				lem_in_find_paths(t_data *data);
-void			run_ants_print_answer(t_data *data);
+void			run_ants_print_answer(t_data *data, char direct);
 
 
 void count_new_max_path_cost(t_data *data);

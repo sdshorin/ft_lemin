@@ -27,6 +27,11 @@ int		void_vector_init(t_void_vector *v_vector)
 	return (0);
 }
 
+void void_vector_reset(t_void_vector *src)
+{
+	src->size = 0;
+}
+
 int		void_vector_search(t_void_vector *haystack, void *needle)
 {
 	int		i;
@@ -74,8 +79,6 @@ void	*void_vector_pop_back(t_void_vector *v_vector)
 	return (v_vector->data[v_vector->size]);
 }
 
-
-
 void pint_void_vector(t_void_vector *v_vector)
 {
 	size_t i;
@@ -88,11 +91,6 @@ void pint_void_vector(t_void_vector *v_vector)
 		i++;
 	}
 	printf("--------------\n");
-}
-
-void void_vector_reset(t_void_vector *src)
-{
-	src->size = 0;
 }
 
 void 	void_vector_copy(t_void_vector *dst, t_void_vector *src)

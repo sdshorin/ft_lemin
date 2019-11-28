@@ -53,7 +53,8 @@ int teleporte_step_back(t_room *prev_room, t_room *room, t_queue *queue)
 	room->prev_on_path->recipe.path_cost = prev_room->recipe.path_cost;
 	int_vector_reset(&room->prev_on_path->recipe.used_old_paths);
 	int_vector_copy(&room->prev_on_path->recipe.used_old_paths, &prev_room->recipe.used_old_paths);
-	int_vector_push_back(&room->prev_on_path->recipe.used_old_paths, room->path_index);
+	if (int_vector_push_back(&room->prev_on_path->recipe.used_old_paths, room->path_index) == 1)
+		error_handler("Allocation error in teleporte??", NULL);
 
 	void_vector_reset(&room->prev_on_path->recipe.start_old_path_room);
 	void_vector_copy(&room->prev_on_path->recipe.start_old_path_room, &prev_room->recipe.start_old_path_room);
@@ -344,11 +345,11 @@ t_room	*clear_old_path(t_room *now_room, t_void_vector *start_old_path_room)
 
 void	make_new_way(t_data *data)
 {
-	int last_path;
+	int		last_path;
 	t_room	*now_room;
 
 	now_room = data->end;
-	last_path = 0;
+//	last_path = 0;
 	int_vector_push_front(&data->end->recipe.used_old_paths, data->path_quantity);
 	while (data->end->recipe.used_old_paths.size > 0)
 	{
@@ -376,14 +377,14 @@ void count_new_max_path_cost(t_data *data)
 	data->max_path_cost = (data->sum_path_len / data->path_quantity) - 2;
 	if (data->sum_path_len % data->path_quantity)
 		data->max_path_cost += 1;
-	// printf("max path cost = %d\n", data->max_path_cost);
+//	printf("max path cost = %d\n", data->max_path_cost);
 }
 ////////////////// end count_new_max_path_cost
 
 
 
-////////////////// reset_all_recipe
-void reset_all_room(t_data *data)
+////////////////// reset_all_recipes
+void reset_paths(t_data *data)
 {
 	t_room *now_room;
 
@@ -396,7 +397,7 @@ void reset_all_room(t_data *data)
 		now_room->recipe.path_cost = -1;
 		int_vector_reset(&now_room->recipe.used_old_paths);
 		void_vector_reset(&now_room->recipe.start_old_path_room);
-		now_room->recipe.step_back_on_path = 0;
+//		now_room->recipe.step_back_on_path = 0;
 		now_room = now_room->next;
 	}
 	data->end->prev_on_path = 0;
@@ -406,7 +407,7 @@ void reset_all_room(t_data *data)
 	data->start->next_on_path = 0;
 	data->start->path_index = -1;
 }
-////////////////// end  reset_all_recipe
+////////////////// end  reset_all_recipes
 
 // void print_path_len(t_data *data)
 // {
