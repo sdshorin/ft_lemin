@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 
- # define BUFF_SIZE 1024
+# define BUFF_SIZE 1024
 
 typedef struct	s_list
 {
@@ -143,13 +143,13 @@ void			ft_int_vector_free(t_int_vector *int_vector);
 int				ft_int_vector_init(t_int_vector *int_vector);
 int				ft_int_vector_push_back(t_int_vector *int_vector, int i);
 int				ft_int_vector_pop_back(t_int_vector *int_vector);
-void 			ft_int_vector_copy(t_int_vector *dst, t_int_vector *src);
+void			ft_int_vector_copy(t_int_vector *dst, t_int_vector *src);
 void			ft_int_vector_reset(t_int_vector *src);
 void			ft_int_vector_push_front(t_int_vector *int_vector, int new_num);
 
 void			ft_void_queue_free(t_void_queue *void_queue);
 int				ft_void_queue_init(t_void_queue *int_queue);
-int 			ft_void_queue_resize(t_void_queue *void_queue);
+int				ft_void_queue_resize(t_void_queue *void_queue);
 int				ft_void_queue_push(t_void_queue *void_queue, void *v);
 void			*ft_void_queue_pop_back(t_void_queue *void_queue);
 

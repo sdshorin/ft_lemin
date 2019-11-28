@@ -61,7 +61,7 @@ static t_fd_list	*find_t_fd_list(const int fd, t_fd_list **start_list)
 	return (temp);
 }
 
-static int		read_to_list(t_fd_list *temp, t_fd_list **start_list)
+static int			read_to_list(t_fd_list *temp, t_fd_list **start_list)
 {
 	char			buff[BUFF_SIZE + 1];
 	char			*temp_str;
