@@ -16,7 +16,8 @@ void	make_first_recipe(t_recipe prev_recipe, t_room *room)
 {
 	room->recipe.path_cost = prev_recipe.path_cost + 1;
 	ft_int_vector_reset(&room->recipe.used_old_paths);
-	ft_int_vector_copy(&room->recipe.used_old_paths, &prev_recipe.used_old_paths);
+	ft_int_vector_copy(&room->recipe.used_old_paths,
+								&prev_recipe.used_old_paths);
 }
 
 void	add_start(t_queue *queue, t_data *data)
