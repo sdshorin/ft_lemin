@@ -117,8 +117,21 @@ t_room			*get_from_queue(t_queue *queue);
 int				lem_in_find_paths(t_data *data);
 void			run_ants_print_answer(t_data *data);
 void handle_direct_path(t_data *data);
+int		make_recipe_step_back(t_room *prev_room, t_room *room, t_queue *queue);
+int make_recipe(t_room *prev_room, t_room *room, t_queue *queue);
 
 
 void count_new_max_path_cost(t_data *data);
+
+void		add_start(t_queue *queue, t_data *data);
+int		find_new_way(t_data *data);
+void	make_new_way(t_data *data);
+
+void make_ant(int ant_index, t_ant **first_ant, t_room *next_room,
+		t_ant **last_ant);
+void move_now_ants(t_ant **first_ant, t_ant **last_ant);
+void sort_paths(t_data *data);
+void create_now_ants(t_data *data, int *ant_index, t_ant** first_ant,
+		t_ant** last_ant);
 
 #endif
