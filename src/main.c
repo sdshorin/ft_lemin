@@ -50,7 +50,7 @@ int		main(int argc, char **argv)
 
 
 // display_debug_data(data);
-	if (void_vector_search(&(data->start->links), data->end) >= 0)
+	if (ft_void_vector_search(&(data->start->links), data->end) >= 0)
 		run_ants_print_answer(data, '1');
 	else
 	{

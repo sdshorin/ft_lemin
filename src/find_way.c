@@ -12,8 +12,8 @@
 void		make_first_recipe(t_recipe prev_recipe, t_room *room)
 {
 	room->recipe.path_cost = prev_recipe.path_cost + 1;
-	int_vector_reset(&room->recipe.used_old_paths);
-	int_vector_copy(&room->recipe.used_old_paths, &prev_recipe.used_old_paths);
+	ft_int_vector_reset(&room->recipe.used_old_paths);
+	ft_int_vector_copy(&room->recipe.used_old_paths, &prev_recipe.used_old_paths);
 }
 
 void		add_start(t_queue *queue, t_data *data)
@@ -51,15 +51,15 @@ int teleporte_step_back(t_room *prev_room, t_room *room, t_queue *queue)
 	// if (room->prev_on_path->is_start)
 	// 	return (0);
 	room->prev_on_path->recipe.path_cost = prev_room->recipe.path_cost;
-	int_vector_reset(&room->prev_on_path->recipe.used_old_paths);
-	int_vector_copy(&room->prev_on_path->recipe.used_old_paths, &prev_room->recipe.used_old_paths);
-	if (int_vector_push_back(&room->prev_on_path->recipe.used_old_paths, room->path_index) == 1)
+	ft_int_vector_reset(&room->prev_on_path->recipe.used_old_paths);
+	ft_int_vector_copy(&room->prev_on_path->recipe.used_old_paths, &prev_room->recipe.used_old_paths);
+	if (ft_int_vector_push_back(&room->prev_on_path->recipe.used_old_paths, room->path_index) == 1)
 		error_handler("Allocation error in teleporte??", NULL);
 
-	void_vector_reset(&room->prev_on_path->recipe.start_old_path_room);
-	void_vector_copy(&room->prev_on_path->recipe.start_old_path_room, &prev_room->recipe.start_old_path_room);
-	void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room, prev_room);
-	void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room, room);
+	ft_void_vector_reset(&room->prev_on_path->recipe.start_old_path_room);
+	ft_void_vector_copy(&room->prev_on_path->recipe.start_old_path_room, &prev_room->recipe.start_old_path_room);
+	ft_void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room, prev_room);
+	ft_void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room, room);
 	add_to_queue(queue, room->prev_on_path, room);
 
 	return (0);
@@ -80,17 +80,17 @@ int make_recipe(t_room *prev_room, t_room *room, t_queue *queue)
 		return (1);
 
 	room->recipe.path_cost = prev_room->recipe.path_cost + 1;
-	int_vector_reset(&room->recipe.used_old_paths);
-	int_vector_copy(&room->recipe.used_old_paths, &prev_room->recipe.used_old_paths);
-	void_vector_reset(&room->recipe.start_old_path_room);
-	void_vector_copy(&room->recipe.start_old_path_room, &prev_room->recipe.start_old_path_room);
+	ft_int_vector_reset(&room->recipe.used_old_paths);
+	ft_int_vector_copy(&room->recipe.used_old_paths, &prev_room->recipe.used_old_paths);
+	ft_void_vector_reset(&room->recipe.start_old_path_room);
+	ft_void_vector_copy(&room->recipe.start_old_path_room, &prev_room->recipe.start_old_path_room);
 	add_to_queue(queue, room, prev_room );
 
 // 	if (room->path_index > -1)
 // 	{
 // 		// room->recipe.step_back_on_path = 0;
 // //		room->recipe.used_old_paths.push_back(room->path_index);
-// 		int_vector_push_back(&room->recipe.used_old_paths, room->path_index);
+// 		ft_int_vector_push_back(&room->recipe.used_old_paths, room->path_index);
 // 	}
 	return (0);
 }
@@ -122,10 +122,10 @@ int		make_recipe_step_back(t_room *prev_room, t_room *room, t_queue *queue)
 		return (1);
 	room->recipe.path_cost = prev_room->recipe.path_cost - 1;
 	// room->recipe.step_back_on_path = 1;
-	int_vector_reset(&room->recipe.used_old_paths);
-	int_vector_copy(&room->recipe.used_old_paths, &prev_room->recipe.used_old_paths);
-	void_vector_reset(&room->recipe.start_old_path_room);
-	void_vector_copy(&room->recipe.start_old_path_room, &prev_room->recipe.start_old_path_room);
+	ft_int_vector_reset(&room->recipe.used_old_paths);
+	ft_int_vector_copy(&room->recipe.used_old_paths, &prev_room->recipe.used_old_paths);
+	ft_void_vector_reset(&room->recipe.start_old_path_room);
+	ft_void_vector_copy(&room->recipe.start_old_path_room, &prev_room->recipe.start_old_path_room);
 	add_to_queue(queue, room, prev_room );
 	return (0);
 }
@@ -281,8 +281,8 @@ void	rename_old_path(t_room *now_room, int path_index, t_room *end)
 
 // // if (!now_room->recipe_come_from)
 // // 			printf("find!\n");
-// 	last_room_on_old_path = void_vector_pop_back(start_old_path_room);
-// 	first_free_node = void_vector_pop_back(start_old_path_room);
+// 	last_room_on_old_path = ft_void_vector_pop_back(start_old_path_room);
+// 	first_free_node = ft_void_vector_pop_back(start_old_path_room);
 // 	now_room = now_room->recipe_come_from;
 // 	while (now_room != last_room_on_old_path)
 // 	{
@@ -325,8 +325,8 @@ t_room	*clear_old_path(t_room *now_room, t_void_vector *start_old_path_room)
 	t_room	*first_node_to_clear;
 	t_room 	*next_room;
 
-	last_room_on_old_path = void_vector_pop_back(start_old_path_room);
-	first_free_node = void_vector_pop_back(start_old_path_room);
+	last_room_on_old_path = ft_void_vector_pop_back(start_old_path_room);
+	first_free_node = ft_void_vector_pop_back(start_old_path_room);
 	first_node_to_clear = now_room->prev_on_path->next_on_path;
 	now_room->prev_on_path->next_on_path = now_room;
 	now_room = first_node_to_clear;
@@ -350,10 +350,10 @@ void	make_new_way(t_data *data)
 
 	now_room = data->end;
 //	last_path = 0;
-	int_vector_push_front(&data->end->recipe.used_old_paths, data->path_quantity);
+	ft_int_vector_push_front(&data->end->recipe.used_old_paths, data->path_quantity);
 	while (data->end->recipe.used_old_paths.size > 0)
 	{
-		last_path = int_vector_pop_back(&data->end->recipe.used_old_paths);
+		last_path = ft_int_vector_pop_back(&data->end->recipe.used_old_paths);
 		rename_old_path(now_room, last_path, data->end);
 		now_room = create_new_path(now_room, last_path, data->start);
 		if (now_room == data->start)
@@ -395,8 +395,8 @@ void reset_paths(t_data *data)
 		now_room->next_in_queue = 0;
 		now_room->recipe_come_from = 0;
 		now_room->recipe.path_cost = -1;
-		int_vector_reset(&now_room->recipe.used_old_paths);
-		void_vector_reset(&now_room->recipe.start_old_path_room);
+		ft_int_vector_reset(&now_room->recipe.used_old_paths);
+		ft_void_vector_reset(&now_room->recipe.start_old_path_room);
 //		now_room->recipe.step_back_on_path = 0;
 		now_room = now_room->next;
 	}
@@ -445,7 +445,7 @@ int lem_in_find_paths(t_data *data)
 	{ 
 		make_new_way(data);
 		count_new_max_path_cost(data);
-		reset_all_room(data);
+		reset_paths(data);
 	}
 	return (0);
 }

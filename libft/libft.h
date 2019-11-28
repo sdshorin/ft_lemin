@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 
-// # define BUFF_SIZE 1
+ # define BUFF_SIZE 1024
 
 typedef struct	s_list
 {
@@ -25,6 +25,15 @@ typedef struct	s_list
 	size_t			content_size;
 	struct s_list	*next;
 }				t_list;
+
+typedef struct	s_fd_list_struct
+{
+	char					*str;
+	int						fd;
+	int						end;
+	struct s_fd_list_struct	*next;
+	struct s_fd_list_struct	*prev;
+}				t_fd_list;
 
 typedef struct	s_void_vector
 {
@@ -122,33 +131,26 @@ int				ft_numlen(const char *str);
 int				ft_strchr_pos(const char *str, int c);
 int				get_next_line(const int fd, char **line);
 
-void			void_vector_free(t_void_vector *v_vector);
-int				void_vector_init(t_void_vector *v_vector);
-int				void_vector_push_back(t_void_vector *v_vector, void *v);
-void			*void_vector_pop_back(t_void_vector *v_vector);
-int				void_vector_search(t_void_vector *haystack, void *needle);
+void			ft_void_vector_reset(t_void_vector *src);
+void			ft_void_vector_copy(t_void_vector *dst, t_void_vector *src);
+void			ft_void_vector_free(t_void_vector *v_vector);
+int				ft_void_vector_init(t_void_vector *v_vector);
+int				ft_void_vector_push_back(t_void_vector *v_vector, void *v);
+void			*ft_void_vector_pop_back(t_void_vector *v_vector);
+int				ft_void_vector_search(t_void_vector *haystack, void *needle);
 
-void			int_vector_free(t_int_vector *int_vector);
-int				int_vector_init(t_int_vector *int_vector);
-int				int_vector_push_back(t_int_vector *int_vector, int i);
-int				int_vector_pop_back(t_int_vector *int_vector);
+void			ft_int_vector_free(t_int_vector *int_vector);
+int				ft_int_vector_init(t_int_vector *int_vector);
+int				ft_int_vector_push_back(t_int_vector *int_vector, int i);
+int				ft_int_vector_pop_back(t_int_vector *int_vector);
+void 			ft_int_vector_copy(t_int_vector *dst, t_int_vector *src);
+void			ft_int_vector_reset(t_int_vector *src);
+void			ft_int_vector_push_front(t_int_vector *int_vector, int new_num);
 
-void 			int_vector_copy(t_int_vector *dst, t_int_vector *src);
-
-#include <stdio.h> // DELETE
-void int_vector_reset(t_int_vector *src);
-void int_vector_push_front(t_int_vector *int_vector, int new_num);
-void pint_void_vector(t_void_vector *v_vector);
-void void_vector_reset(t_void_vector *src);
-void 	void_vector_copy(t_void_vector *dst, t_void_vector *src);
-
-
-
-
-void			void_queue_free(t_void_queue *void_queue);
-int				void_queue_init(t_void_queue *int_queue);
-int 			resize_void_queue(t_void_queue *void_queue);
-int				t_void_queue_push(t_void_queue *void_queue, void *v);
-void			*void_queue_pop_back(t_void_queue *void_queue);
+void			ft_void_queue_free(t_void_queue *void_queue);
+int				ft_void_queue_init(t_void_queue *int_queue);
+int 			ft_void_queue_resize(t_void_queue *void_queue);
+int				ft_void_queue_push(t_void_queue *void_queue, void *v);
+void			*ft_void_queue_pop_back(t_void_queue *void_queue);
 
 #endif

@@ -25,7 +25,7 @@ static void	destroy_rooms(t_data *data)
 		ft_strdel(&(cur->name));
 		ft_memdel((void **)&cur->links.data);
 		ft_memdel((void **)&cur->recipe.used_old_paths.data);
-		void_vector_free(&cur->recipe.start_old_path_room);
+		ft_void_vector_free(&cur->recipe.start_old_path_room);
 		prev = cur;
 		cur = cur->next;
 		ft_memdel((void **)&prev);

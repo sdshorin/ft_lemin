@@ -25,9 +25,9 @@ static t_room	*match_name(char *name, t_room *room) //, t_data *data)
 
 static void		add_link(t_room *link_from, t_room *link_to, t_data *data)
 {
-	if (void_vector_search(&link_from->links, link_to) != -1)
+	if (ft_void_vector_search(&link_from->links, link_to) != -1)
 		return ;
-	if (void_vector_push_back(&link_from->links, link_to) == 1)
+	if (ft_void_vector_push_back(&link_from->links, link_to) == 1)
 		error_handler("Allocation error in add_link!", data);
 	link_from->q_links++;
 }

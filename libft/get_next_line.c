@@ -12,20 +12,6 @@
 
 #include "libft.h"
 
-
-# define BUFF_SIZE 1024
-
-int				get_next_line(const int fd, char **line);
-
-typedef struct	s_fd_list_struct
-{
-	char					*str;
-	int						fd;
-	int						end;
-	struct s_fd_list_struct	*next;
-	struct s_fd_list_struct	*prev;
-}				t_fd_list;
-
 static t_fd_list	*new_t_fd_list(int fd)
 {
 	t_fd_list	*temp;
@@ -66,7 +52,7 @@ static t_fd_list	*find_t_fd_list(const int fd, t_fd_list **start_list)
 	temp = *start_list;
 	while (temp->next && temp->fd != fd)
 		temp = temp->next;
-	if (!(temp->fd == fd))
+	if (temp->fd != fd)
 	{
 		temp->next = new_t_fd_list(fd);
 		temp->next->prev = temp;
@@ -75,7 +61,7 @@ static t_fd_list	*find_t_fd_list(const int fd, t_fd_list **start_list)
 	return (temp);
 }
 
-static int			read_to_list(t_fd_list *temp, t_fd_list **start_list)
+static int		read_to_list(t_fd_list *temp, t_fd_list **start_list)
 {
 	char			buff[BUFF_SIZE + 1];
 	char			*temp_str;

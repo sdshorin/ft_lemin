@@ -26,9 +26,9 @@ static void		init_room(t_room *room)
 	// room->is_finish = 0;
 	// room->is_start = 0;
 	room->recipe_come_from = 0;
-	int_vector_init(&room->recipe.used_old_paths);
-	void_vector_init(&room->recipe.start_old_path_room);
-	void_vector_init(&room->links);
+	ft_int_vector_init(&room->recipe.used_old_paths);
+	ft_void_vector_init(&room->recipe.start_old_path_room);
+	ft_void_vector_init(&room->links);
 	// room->links = NULL;
 }
 
