@@ -38,9 +38,9 @@ typedef struct	s_room
 	int				x;
 	int				y;
 	struct s_room	*next;
-	int				level;
 	int				q_links;
 	struct s_room	*next_on_path;
+	struct s_room   *prev_on_path;
 	struct s_room	*recipe_come_from;
 	int				path_index;
 	t_void_vector	links;

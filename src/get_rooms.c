@@ -15,7 +15,6 @@
 static void		init_room(t_room *room)
 {
 	room->next = NULL;
-	room->level = 0;
 	room->q_links = 0;
 	room->recipe.path_cost = -1;
 	room->path_index = -1;
