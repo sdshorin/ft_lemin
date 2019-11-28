@@ -12,10 +12,10 @@ LIBFT_DIR = ./libft/
 LFT = -L $(LIBFT_DIR) -lft
 
 SRCS_LIST = main.c destroyers.c get_ants.c get_data.c get_links.c \
-get_rooms.c init_data.c store_input_strings.c queue.c 	algo_find_new_way.c \
-algo_find_way.c algo_make_new_way.c algo_recipe.c output_ants.c \
-output_ants_run.c output_path_sort.c
-HEADERS_LIST = lemin.h
+	get_rooms.c init_data.c store_input_strings.c queue.c 	algo_find_new_way.c \
+	algo_find_way.c algo_make_new_way.c algo_recipe.c output_ants.c \
+	output_ants_run.c output_path_sort.c
+	HEADERS_LIST = lemin.h
 
 SRCS = $(addprefix $(SRC_DIR),$(SRCS_LIST))
 
@@ -24,7 +24,7 @@ OBJS = $(SRCS:.c=.o)
 INCLUDES = -I $(INC_DIR) -I $(LIBFT_DIR)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -36,13 +36,7 @@ $(NAME): $(LIBFT) $(OBJS)
 	@$(CC) $(CFLAGS) $(LFT) $(INCLUDES) $(OBJS) -o $(NAME)
 	@echo "$(NAME_PS) executable created"
 
-# $(NAME_CH): $(LIBFT) $(OP_OBJS) $(CH_OBJS)
-# 	@$(CC) $(CFLAGS) $(LFT) $(INCLUDES) $(OP_OBJS) $(CH_OBJS) -o $(NAME_CH)
-# 	@echo "$(NAME_CH) executable created"
-
-FORCE: ;
-
-$(LIBFT): FORCE
+$(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 clean:
