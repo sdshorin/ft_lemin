@@ -1,14 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   output_ants.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjesse <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/28 20:04:48 by bjesse            #+#    #+#             */
+/*   Updated: 2019/11/28 20:04:49 by bjesse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lemin.h"
 
-
-
-
-void make_ant(int ant_index, t_ant **first_ant, t_room *next_room,
+void	make_ant(int ant_index, t_ant **first_ant, t_room *next_room,
 		t_ant **last_ant)
 {
 	t_ant *now_ant;
-	
+
 	now_ant = (t_ant*)malloc(sizeof(t_ant));
 	now_ant->ant_index = ant_index;
 	now_ant->now_room = next_room;
@@ -26,12 +34,10 @@ void make_ant(int ant_index, t_ant **first_ant, t_room *next_room,
 		now_ant->prev_ant = *last_ant;
 		*last_ant = now_ant;
 	}
-	
 }
 
-
-void create_now_ants(t_data *data, int *ant_index, t_ant** first_ant,
-		t_ant** last_ant)
+void	create_now_ants(t_data *data, int *ant_index, t_ant **first_ant,
+		t_ant **last_ant)
 {
 	size_t	i;
 	void	**v_vector;
@@ -55,12 +61,12 @@ void create_now_ants(t_data *data, int *ant_index, t_ant** first_ant,
 			data->ants--;
 		}
 		i++;
-	}	
+	}
 }
 
-t_ant *delete_ant(t_ant *ant, t_ant **first_ant, t_ant **last_ant)
+t_ant	*delete_ant(t_ant *ant, t_ant **first_ant, t_ant **last_ant)
 {
-	t_ant* to_return;
+	t_ant	*to_return;
 
 	if (*first_ant == ant)
 		*first_ant = ant->next_ant;
@@ -72,14 +78,10 @@ t_ant *delete_ant(t_ant *ant, t_ant **first_ant, t_ant **last_ant)
 	if (ant->next_ant != NULL)
 		ant->next_ant->prev_ant = ant->prev_ant;
 	free(ant);
-
 	return (to_return);
 }
 
-
-
-
-void move_now_ants(t_ant **first_ant, t_ant **last_ant)
+void	move_now_ants(t_ant **first_ant, t_ant **last_ant)
 {
 	int		need_whitespace;
 	t_ant	*ant;
@@ -88,7 +90,6 @@ void move_now_ants(t_ant **first_ant, t_ant **last_ant)
 	need_whitespace = 0;
 	while (ant)
 	{
-
 		if (need_whitespace)
 			write(1, " ", 1);
 		need_whitespace = 1;

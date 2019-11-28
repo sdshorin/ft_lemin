@@ -1,13 +1,18 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   output_path_sort.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bjesse <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/28 20:06:21 by bjesse            #+#    #+#             */
+/*   Updated: 2019/11/28 20:06:23 by bjesse           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lemin.h"
 
-
-
-
-
-
-void write_to_recipe_path_len(t_room *room)
+void	write_to_recipe_path_len(t_room *room)
 {
 	t_room	*now_room;
 	int		i;
@@ -24,7 +29,7 @@ void write_to_recipe_path_len(t_room *room)
 	room->recipe.path_cost = i;
 }
 
-void set_all_path_len(t_data *data)
+void	set_all_path_len(t_data *data)
 {
 	size_t	i;
 	void	**v_vector;
@@ -33,7 +38,7 @@ void set_all_path_len(t_data *data)
 	v_vector = data->start->links.data;
 	while (i < data->start->links.size)
 	{
-		if (((t_room*)v_vector[i])->path_index >  -1)
+		if (((t_room*)v_vector[i])->path_index > -1)
 			write_to_recipe_path_len((t_room*)v_vector[i]);
 		else if (((t_room*)v_vector[i]) == data->end)
 			((t_room*)v_vector[i])->recipe.path_cost = 1;
@@ -43,9 +48,7 @@ void set_all_path_len(t_data *data)
 	}
 }
 
-
-
-void swap_void_vector(void **v_vector, size_t i, size_t j)
+void	swap_void_vector(void **v_vector, size_t i, size_t j)
 {
 	void *temp;
 
@@ -54,7 +57,7 @@ void swap_void_vector(void **v_vector, size_t i, size_t j)
 	v_vector[j] = temp;
 }
 
-void sort_paths(t_data *data)
+void	sort_paths(t_data *data)
 {
 	size_t	i;
 	size_t	j;
