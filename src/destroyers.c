@@ -53,7 +53,6 @@ void		destroy_data(t_data *data)
 {
 	if (data != NULL)
 	{
-//		get_next_line(data->fd, NULL, -1);
 		destroy_rooms(data);
 		destroy_input(data);
 		ft_memdel((void **)&data);

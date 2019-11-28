@@ -67,10 +67,8 @@ t_data			*get_data(t_data *data)
 			continue ;
 		if (mode == 0 && ft_strchr(str, '-') != NULL)
 			mode = mode_switcher(data, str);
-		mode == 0 ? get_room(str, data, &comm) : (mode = get_link(str, data));
+		mode == 0 ? get_room(str, data, &comm) :
+										(mode = get_link(str, data));
 	}
-	// data->start->is_start = 1;
-	// data->end->is_finish = 1;
-
 	return (data);
 }

@@ -15,7 +15,6 @@
 
 void	error_handler(char *message, t_data *data)
 {
-//	get_next_line(data->fd, NULL);
 	if (data != NULL)
 	{
 		get_next_line(data->fd, NULL);
@@ -25,10 +24,8 @@ void	error_handler(char *message, t_data *data)
 	exit(1);
 }
 
-
-void lem_in_main(t_data *data)
+void	lem_in_main(t_data *data)
 {
-
 	if (void_vector_search(&(data->start->links), data->end) >= 0)
 		handle_direct_path(data);
 	else
@@ -39,9 +36,7 @@ void lem_in_main(t_data *data)
 		else
 			run_ants_print_answer(data);
 	}
-
 }
-
 
 int		main(int argc, char **argv)
 {
