@@ -114,19 +114,6 @@ void sort_paths(t_data *data)
 	}
 }
 
-void handle_direct_path(t_data *data, t_ant **first_ant, t_ant **last_ant)
-{
-	int i;
-	t_room *end;
-
-	i = 1;
-	end = data->end;
-	while (i <= data->ants)
-	{
-		make_ant(i, first_ant, end, last_ant);
-		i++;
-	}
-}
 
 void create_now_ants(t_data *data, int *ant_index, t_ant** first_ant,
 		t_ant** last_ant)
@@ -206,8 +193,27 @@ void move_now_ants(t_ant **first_ant, t_ant **last_ant) //, t_room *end)
 	}
 }
 
+void handle_direct_path(t_data *data)
+{
+	t_ant	*first_ant;
+	t_ant	*last_ant;
+	int i;
+	t_room *end;
 
-void run_ants_print_answer(t_data *data, char direct)
+	i = 1;
+	end = data->end;
+	first_ant = 0;
+	last_ant = 0;
+	while (i <= data->ants)
+	{
+		make_ant(i, &first_ant, end, &last_ant);
+		i++;
+	}
+	move_now_ants(&first_ant, &last_ant);
+	write(1, "\n", 1);
+}
+
+void run_ants_print_answer(t_data *data)
 {
 	t_ant	*first_ant;
 	t_ant	*last_ant;
@@ -216,13 +222,7 @@ void run_ants_print_answer(t_data *data, char direct)
 	first_ant = 0;
 	ant_index = 1;
 	last_ant = 0;
-	if (direct == '1')
-	{
-		handle_direct_path(data, &first_ant, &last_ant);
-		move_now_ants(&first_ant, &last_ant);
-		write(1, "\n", 1);
-		return ;
-	}
+
 	sort_paths(data);
 	while(data->ants > 0 || first_ant)
 	{

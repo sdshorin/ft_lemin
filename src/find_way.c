@@ -445,7 +445,7 @@ int lem_in_find_paths(t_data *data)
 	{ 
 		make_new_way(data);
 		count_new_max_path_cost(data);
-		reset_all_room(data);
+		reset_paths(data);
 	}
 	return (0);
 }
