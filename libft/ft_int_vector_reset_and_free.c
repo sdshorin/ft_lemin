@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_void_vector_copy.c                              :+:      :+:    :+:   */
+/*   ft_int_vector_reset_and_free.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpsylock <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 19:48:38 by kpsylock          #+#    #+#             */
-/*   Updated: 2019/11/28 19:51:08 by kpsylock         ###   ########.fr       */
+/*   Created: 2019/11/28 19:48:28 by kpsylock          #+#    #+#             */
+/*   Updated: 2019/11/28 19:48:30 by kpsylock         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
-void	ft_void_vector_copy(t_void_vector *dst, t_void_vector *src)
+void	ft_int_vector_free(t_int_vector *int_vector)
 {
-	size_t	i;
+	free(int_vector->data);
+}
 
-	ft_void_vector_reset(dst);
-	i = 0;
-	while (i < src->size)
-	{
-		ft_void_vector_push_back(dst, src->data[i]);
-		i++;
-	}
+void	ft_int_vector_reset(t_int_vector *src)
+{
+	src->size = 0;
 }

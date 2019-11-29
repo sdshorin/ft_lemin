@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_int_vector_copy.c                               :+:      :+:    :+:   */
+/*   ft_int_vector_init.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpsylock <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 19:47:10 by kpsylock          #+#    #+#             */
-/*   Updated: 2019/11/28 19:47:15 by kpsylock         ###   ########.fr       */
+/*   Created: 2019/11/28 19:47:23 by kpsylock          #+#    #+#             */
+/*   Updated: 2019/11/28 19:47:26 by kpsylock         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
-void	ft_int_vector_copy(t_int_vector *dst, t_int_vector *src)
+int		ft_int_vector_init(t_int_vector *int_vector)
 {
-	size_t i;
-
-	ft_int_vector_reset(dst);
-	i = 0;
-	while (i < src->size)
-	{
-		ft_int_vector_push_back(dst, src->data[i]);
-		i++;
-	}
+	int_vector->size = 0;
+	int_vector->capacity = 16;
+	int_vector->data = (int*)malloc(int_vector->capacity * sizeof(int));
+	if (!int_vector->data)
+		return (1);
+	return (0);
 }

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_void_queue_push.c                               :+:      :+:    :+:   */
+/*   ft_void_vector_init.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpsylock <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 19:49:54 by kpsylock          #+#    #+#             */
-/*   Updated: 2019/11/28 19:49:55 by kpsylock         ###   ########.fr       */
+/*   Created: 2019/11/28 19:48:46 by kpsylock          #+#    #+#             */
+/*   Updated: 2019/11/28 19:48:47 by kpsylock         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
-int	ft_void_queue_push(t_void_queue *void_queue, void *v)
+int		ft_void_vector_init(t_void_vector *v_vector)
 {
-	if (void_queue->size < void_queue->capacity)
-	{
-		void_queue->data[(void_queue->start + void_queue->size) %
-			void_queue->capacity] = v;
-		void_queue->size++;
-		return (0);
-	}
-	if (ft_void_queue_resize(void_queue))
-		return (-1);
-	void_queue->data[void_queue->size] = v;
-	void_queue->size++;
+	v_vector->size = 0;
+	v_vector->capacity = 16;
+	v_vector->data = (void**)malloc(v_vector->capacity * sizeof(void*));
+	if (!v_vector->data)
+		return (1);
 	return (0);
 }

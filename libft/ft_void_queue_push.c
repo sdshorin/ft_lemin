@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_void_vector_search.c                            :+:      :+:    :+:   */
+/*   ft_void_queue_push.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kpsylock <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 19:49:20 by kpsylock          #+#    #+#             */
-/*   Updated: 2019/11/28 19:49:22 by kpsylock         ###   ########.fr       */
+/*   Created: 2019/11/28 19:49:54 by kpsylock          #+#    #+#             */
+/*   Updated: 2019/11/28 19:49:55 by kpsylock         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
-int		ft_void_vector_search(t_void_vector *haystack, void *needle)
+int	ft_void_queue_push(t_void_queue *void_queue, void *v)
 {
-	int		i;
-	int		size;
-
-	i = 0;
-	size = haystack->size;
-	while (i < size)
+	if (void_queue->size < void_queue->capacity)
 	{
-		if (haystack->data[i] == needle)
-			return (i);
-		i++;
+		void_queue->data[(void_queue->start + void_queue->size) %
+			void_queue->capacity] = v;
+		void_queue->size++;
+		return (0);
 	}
-	return (-1);
+	if (ft_void_queue_resize(void_queue))
+		return (-1);
+	void_queue->data[void_queue->size] = v;
+	void_queue->size++;
+	return (0);
 }
