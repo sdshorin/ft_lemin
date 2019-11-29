@@ -27,39 +27,49 @@ static void		init_room(t_room *room)
 	ft_void_vector_init(&room->links);
 }
 
-static t_room	*del_room(t_room *room)
+static int		check_coords(char **str, int x, int y)
 {
-	if (room->name != NULL)
-		ft_strdel(&(room->name));
-	free(room);
-	return (NULL);
+	int i;
+	int j;
+
+	if ((ft_abs(x) == 1 && ft_numlen(str[1]) > 1) ||
+			(ft_abs(y) == 1 && ft_numlen(str[2]) > 1))
+		return (-1);
+	i = 1;
+	while (i < 3)
+	{
+		j = 0;
+		while (str[i][j] != '\0')
+		{
+			if (ft_isdigit(str[i][j]) != 1)
+				return (-1);
+			j++;
+		}
+		i++;
+	}
+	return (1);
 }
 
 static int		get_room_params(char *str, t_room *room)
 {
-	int		name_len;
-	int		num_len;
-	int		x;
-	int		y;
+	char	**splitted;
+	int		i;
 
-	name_len = ft_strchr_pos(str, ' ');
-	if (name_len == 0)
+	i = 0;
+	if ((splitted = ft_strsplit(str, ' ')) == NULL)
 		return (-1);
-	if ((room->name = ft_strsub(str, 0, name_len)) == NULL)
-		return (-1);
-	str += name_len + 1;
-	while (*str == ' ')
-		str++;
-	x = ft_atoi(str);
-	num_len = ft_numlen(str);
-	if ((x == -1 || x == 1) && num_len > 1)
-		return (-1);
-	room->x = x;
-	str += num_len;
-	y = ft_atoi(str);
-	if ((y == -1 || y == 1) && ft_numlen(str) > 1)
-		return (-1);
-	room->y = y;
+	while (splitted[i] != NULL)
+		i++;
+	if (i != 3 || ft_strlen(splitted[0]) < 1)
+		return (ft_strsplit_del(splitted));
+	room->name = splitted[0];
+	room->x = ft_atoi(splitted[1]);
+	room->y = ft_atoi(splitted[2]);
+	if (check_coords(splitted, room->x, room->y) == -1)
+		return (ft_strsplit_del(splitted));
+	ft_strdel(&(splitted[1]));
+	ft_strdel(&(splitted[2]));
+	free(splitted);
 	return (0);
 }
 

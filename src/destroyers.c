@@ -12,6 +12,14 @@
 
 #include "lemin.h"
 
+t_room	*del_room(t_room *room)
+{
+	if (room->name != NULL)
+		ft_strdel(&(room->name));
+	free(room);
+	return (NULL);
+}
+
 static void	destroy_rooms(t_data *data)
 {
 	t_room *cur;

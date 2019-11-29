@@ -90,6 +90,7 @@ void			destroy_data(t_data *data);
 t_data			*get_data(t_data *data);
 void			get_ants(t_data *data);
 void			get_room(char *str, t_data *data, int *comm);
+t_room			*del_room(t_room *room);
 int				get_link(char *str, t_data *data);
 int				read_comments(t_data *data, char **str);
 void			error_handler(char *message, t_data *data);
