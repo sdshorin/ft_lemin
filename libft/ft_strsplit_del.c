@@ -12,8 +12,10 @@ int	ft_strsplit_del(char **str)
 	while (str[i] != NULL)
 	{
 		ft_strdel(&(str[i]));
+		str[i] = NULL;
 		i++;
 	}
 	free(str);
+	str = NULL;
 	return (-1);
 }

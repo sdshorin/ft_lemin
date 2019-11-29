@@ -14,14 +14,16 @@
 
 static void		init_room(t_room *room)
 {
+	room->name = NULL;
 	room->next = NULL;
 	room->q_links = 0;
+	room->next_on_path = NULL;
+	room->prev_on_path = NULL;
+	room->recipe_come_from = NULL;
 	room->recipe.path_cost = -1;
 	room->path_index = -1;
-	room->next_in_queue = 0;
-	room->prev_in_queue = 0;
-	room->next_on_path = 0;
-	room->recipe_come_from = 0;
+	room->next_in_queue = NULL;
+	room->prev_in_queue = NULL;
 	ft_int_vector_init(&room->recipe.used_old_paths);
 	ft_void_vector_init(&room->recipe.start_old_path_room);
 	ft_void_vector_init(&room->links);
@@ -66,7 +68,11 @@ static int		get_room_params(char *str, t_room *room)
 	room->x = ft_atoi(splitted[1]);
 	room->y = ft_atoi(splitted[2]);
 	if (check_coords(splitted, room->x, room->y) == -1)
-		return (ft_strsplit_del(splitted));
+	{
+		ft_strsplit_del(splitted);
+		room->name = NULL;
+		return (-1);
+	}
 	ft_strdel(&(splitted[1]));
 	ft_strdel(&(splitted[2]));
 	free(splitted);
@@ -80,6 +86,7 @@ static t_room	*create_room(char *str, t_data *data)
 
 	if ((room = (t_room *)malloc(sizeof(t_room))) == NULL)
 		return (NULL);
+	init_room(room);
 	if ((get_room_params(str, room)) == -1)
 		return (del_room(room));
 	validate = data->first;
@@ -89,7 +96,6 @@ static t_room	*create_room(char *str, t_data *data)
 			return (del_room(room));
 		validate = validate->next;
 	}
-	init_room(room);
 	room->index = data->q_rooms++;
 	return (room);
 }
