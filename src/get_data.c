@@ -40,7 +40,6 @@ int				read_comments(t_data *data, char **str)
 
 static t_data	*finish_reading(t_data *data, char **str)
 {
-	get_next_line(data->fd, str);
 	ft_strdel(str);
 	return (data);
 }
