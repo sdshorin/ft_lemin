@@ -16,8 +16,10 @@ void	make_first_recipe(t_recipe prev_recipe, t_room *room)
 {
 	room->recipe.path_cost = prev_recipe.path_cost + 1;
 	ft_int_vector_reset(&room->recipe.used_old_paths);
-	ft_int_vector_copy(&room->recipe.used_old_paths,
-								&prev_recipe.used_old_paths);
+	if (ft_int_vector_copy(&room->recipe.used_old_paths,
+								&prev_recipe.used_old_paths))
+		error_handler("Allocation error in make_first_recipe!",
+				NULL);
 }
 
 void	add_start(t_queue *queue, t_data *data)
@@ -45,29 +47,36 @@ void	add_start(t_queue *queue, t_data *data)
 
 int		teleporte_step_back(t_room *prev_room, t_room *room, t_queue *queue)
 {
+	int	err;
+
+	err = 0;
 	if (room->prev_on_path->recipe.path_cost != -1
 		&& prev_room->recipe.path_cost >= room->prev_on_path->recipe.path_cost)
 		return (1);
 	room->prev_on_path->recipe.path_cost = prev_room->recipe.path_cost;
 	ft_int_vector_reset(&room->prev_on_path->recipe.used_old_paths);
-	ft_int_vector_copy(&room->prev_on_path->recipe.used_old_paths,
+	err += ft_int_vector_copy(&room->prev_on_path->recipe.used_old_paths,
 									&prev_room->recipe.used_old_paths);
-	if (ft_int_vector_push_back(&room->prev_on_path->recipe.used_old_paths,
-														room->path_index) == 1)
-		error_handler("Allocation error in teleporte??", NULL);
+	err += ft_int_vector_push_back(&room->prev_on_path->recipe.used_old_paths,
+														room->path_index);
 	ft_void_vector_reset(&room->prev_on_path->recipe.start_old_path_room);
-	ft_void_vector_copy(&room->prev_on_path->recipe.start_old_path_room,
+	err += ft_void_vector_copy(&room->prev_on_path->recipe.start_old_path_room,
 										&prev_room->recipe.start_old_path_room);
-	ft_void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room,
+	err +=ft_void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room,
 																prev_room);
-	ft_void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room,
+	err += ft_void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room,
 																	room);
 	add_to_queue(queue, room->prev_on_path, room);
+	if (err > 0)
+		error_handler("Allocation error in teleporte", NULL);
 	return (0);
 }
 
 int		make_recipe(t_room *prev_room, t_room *room, t_queue *queue)
 {
+	int err;
+
+	err = 0;
 	if (room->path_index > -1 && prev_room->path_index != room->path_index)
 	{
 		return (teleporte_step_back(prev_room, room, queue));
@@ -77,27 +86,35 @@ int		make_recipe(t_room *prev_room, t_room *room, t_queue *queue)
 		return (1);
 	room->recipe.path_cost = prev_room->recipe.path_cost + 1;
 	ft_int_vector_reset(&room->recipe.used_old_paths);
-	ft_int_vector_copy(&room->recipe.used_old_paths,
+	err += ft_int_vector_copy(&room->recipe.used_old_paths,
 								&prev_room->recipe.used_old_paths);
 	ft_void_vector_reset(&room->recipe.start_old_path_room);
-	ft_void_vector_copy(&room->recipe.start_old_path_room,
+	err += ft_void_vector_copy(&room->recipe.start_old_path_room,
 								&prev_room->recipe.start_old_path_room);
 	add_to_queue(queue, room, prev_room);
+	if (err > 0)
+		error_handler("Allocation error in make_recipe!", NULL);
 	return (0);
 }
 
 int		make_recipe_step_back(t_room *prev_room, t_room *room, t_queue *queue)
 {
+	int err;
+
+	err = 0;
 	if (room->recipe.path_cost != -1 &&
 					prev_room->recipe.path_cost - 1 >= room->recipe.path_cost)
 		return (1);
 	room->recipe.path_cost = prev_room->recipe.path_cost - 1;
 	ft_int_vector_reset(&room->recipe.used_old_paths);
-	ft_int_vector_copy(&room->recipe.used_old_paths,
+	err += ft_int_vector_copy(&room->recipe.used_old_paths,
 								&prev_room->recipe.used_old_paths);
 	ft_void_vector_reset(&room->recipe.start_old_path_room);
-	ft_void_vector_copy(&room->recipe.start_old_path_room,
+	err += ft_void_vector_copy(&room->recipe.start_old_path_room,
 									&prev_room->recipe.start_old_path_room);
 	add_to_queue(queue, room, prev_room);
+	if (err > 0)
+		error_handler("Allocation error in make_recipe_step_back",
+				NULL);
 	return (0);
 }

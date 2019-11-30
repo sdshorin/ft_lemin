@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_void_vector_copy(t_void_vector *dst, t_void_vector *src)
+int	ft_void_vector_copy(t_void_vector *dst, t_void_vector *src)
 {
 	size_t	i;
 
@@ -20,7 +20,9 @@ void	ft_void_vector_copy(t_void_vector *dst, t_void_vector *src)
 	i = 0;
 	while (i < src->size)
 	{
-		ft_void_vector_push_back(dst, src->data[i]);
+		if (ft_void_vector_push_back(dst, src->data[i]))
+			return (1);
 		i++;
 	}
+	return (0);
 }

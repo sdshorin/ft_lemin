@@ -24,9 +24,12 @@ static void		init_room(t_room *room)
 	room->path_index = -1;
 	room->next_in_queue = NULL;
 	room->prev_in_queue = NULL;
-	ft_int_vector_init(&room->recipe.used_old_paths);
-	ft_void_vector_init(&room->recipe.start_old_path_room);
-	ft_void_vector_init(&room->links);
+	if ((ft_int_vector_init(&room->recipe.used_old_paths)))
+		error_handler("Allocation error in init_room!", NULL);
+	if ((ft_void_vector_init(&room->recipe.start_old_path_room)))
+		error_handler("Allocation error in init_room!", NULL);
+	if ((ft_void_vector_init(&room->links)))
+		error_handler("Allocation error in init_room!", NULL);
 }
 
 static int		check_coords(char **str, int x, int y)

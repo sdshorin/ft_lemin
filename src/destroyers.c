@@ -16,10 +16,14 @@ t_room	*del_room(t_room *room)
 {
 	if (room->name != NULL)
 		ft_strdel(&(room->name));
-	ft_memdel((void **)&room->links.data);
-	ft_memdel((void **)&room->recipe.used_old_paths.data);
-	ft_void_vector_free(&room->recipe.start_old_path_room);
-	ft_void_vector_free(&room->links);
+	if (room->links.data != NULL)
+		ft_memdel((void **)&room->links.data);
+	if (room->recipe.used_old_paths.data != NULL)
+		ft_memdel((void **)&room->recipe.used_old_paths.data);
+	if (room->recipe.start_old_path_room.data != NULL)
+		ft_void_vector_free(&room->recipe.start_old_path_room);
+	if (room->links.data != NULL)
+		ft_void_vector_free(&room->links);
 	free(room);
 	return (NULL);
 }
@@ -37,7 +41,6 @@ static void	destroy_rooms(t_data *data)
 		next = cur->next;
 		del_room(cur);
 		cur = next;
-//		ft_memdel((void **)&prev);
 	}
 }
 

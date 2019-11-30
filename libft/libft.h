@@ -133,7 +133,7 @@ int				ft_strchr_pos(const char *str, int c);
 int				get_next_line(const int fd, char **line);
 
 void			ft_void_vector_reset(t_void_vector *src);
-void			ft_void_vector_copy(t_void_vector *dst, t_void_vector *src);
+int				ft_void_vector_copy(t_void_vector *dst, t_void_vector *src);
 void			ft_void_vector_free(t_void_vector *v_vector);
 int				ft_void_vector_init(t_void_vector *v_vector);
 int				ft_void_vector_push_back(t_void_vector *v_vector, void *v);
@@ -144,9 +144,9 @@ void			ft_int_vector_free(t_int_vector *int_vector);
 int				ft_int_vector_init(t_int_vector *int_vector);
 int				ft_int_vector_push_back(t_int_vector *int_vector, int i);
 int				ft_int_vector_pop_back(t_int_vector *int_vector);
-void			ft_int_vector_copy(t_int_vector *dst, t_int_vector *src);
+int				ft_int_vector_copy(t_int_vector *dst, t_int_vector *src);
 void			ft_int_vector_reset(t_int_vector *src);
-void			ft_int_vector_push_front(t_int_vector *int_vector, int new_num);
+int				ft_int_vector_push_front(t_int_vector *int_vector, int new_num);
 
 void			ft_void_queue_free(t_void_queue *void_queue);
 int				ft_void_queue_init(t_void_queue *int_queue);

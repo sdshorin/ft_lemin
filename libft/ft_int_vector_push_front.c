@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_int_vector_push_front(t_int_vector *int_vector, int new_num)
+int	ft_int_vector_push_front(t_int_vector *int_vector, int new_num)
 {
 	int		last_elem;
 	size_t	i;
@@ -27,8 +27,13 @@ void	ft_int_vector_push_front(t_int_vector *int_vector, int new_num)
 			i++;
 		}
 		int_vector->data[0] = new_num;
-		ft_int_vector_push_back(int_vector, last_elem);
+		if (ft_int_vector_push_back(int_vector, last_elem))
+			return (1);
 	}
 	else
-		ft_int_vector_push_back(int_vector, new_num);
+	{
+		if (ft_int_vector_push_back(int_vector, new_num))
+			return (1);
+	}
+	return (0);
 }
