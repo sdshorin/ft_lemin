@@ -20,7 +20,8 @@ void	get_ants(t_data *data)
 
 	while (get_next_line(data->fd, &str))
 	{
-		if (str[0] == '\n' || str[0] == '\0')
+		if (str[0] == '\n' || str[0] == '\0' ||
+								(str[0] != '#' && !ft_isdigit(str[0])))
 			error_handler("Cannot read ants!", data);
 		if (str[0] == '#' && read_comments(data, &str) != 10)
 			continue ;
