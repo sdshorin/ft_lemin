@@ -66,6 +66,8 @@ int		main(int argc, char **argv)
 	if (argc > 1)
 		read_from_file(argv[1], data);
 	get_data(data);
+	if (!data->first)
+		error_handler("Error: no rooms!", data);
 	if (!data->start || !data->end)
 		error_handler("Error: start or end doesn't define!", data);
 	if (data->start == data->end)
