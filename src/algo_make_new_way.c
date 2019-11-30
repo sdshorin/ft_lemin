@@ -65,7 +65,7 @@ void	make_new_way(t_data *data)
 	t_room	*now_room;
 
 	now_room = data->end;
-	if(ft_int_vector_push_front(&data->end->recipe.used_old_paths,
+	if (ft_int_vector_push_front(&data->end->recipe.used_old_paths,
 					data->path_quantity))
 		error_handler("Allocation error in make_new_way!", NULL);
 	while (data->end->recipe.used_old_paths.size > 0)

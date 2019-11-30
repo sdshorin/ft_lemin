@@ -62,10 +62,10 @@ int		teleporte_step_back(t_room *prev_room, t_room *room, t_queue *queue)
 	ft_void_vector_reset(&room->prev_on_path->recipe.start_old_path_room);
 	err += ft_void_vector_copy(&room->prev_on_path->recipe.start_old_path_room,
 										&prev_room->recipe.start_old_path_room);
-	err +=ft_void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room,
-																prev_room);
-	err += ft_void_vector_push_back(&room->prev_on_path->recipe.start_old_path_room,
-																	room);
+	err += ft_void_vector_push_back(
+				&room->prev_on_path->recipe.start_old_path_room, prev_room);
+	err += ft_void_vector_push_back(
+				&room->prev_on_path->recipe.start_old_path_room, room);
 	add_to_queue(queue, room->prev_on_path, room);
 	if (err > 0)
 		error_handler("Allocation error in teleporte", NULL);

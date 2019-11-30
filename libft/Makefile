@@ -27,7 +27,8 @@ SOURCES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr
    ft_int_vector_init.c ft_int_vector_pop_back.c ft_int_vector_push_back.c ft_int_vector_push_front.c \
    ft_int_vector_reset_and_free.c ft_void_vector_copy.c ft_void_vector_init.c \
    ft_void_vector_pop_back.c ft_void_vector_push_back.c ft_void_vector_reset_and_free.c \
-   ft_void_vector_search.c
+   ft_void_vector_search.c ft_void_queue_free.c ft_void_queue_init.c ft_void_queue_pop_back.c ft_void_queue_push.c \
+   ft_void_queue_resize.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
