@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpsylock <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sergey <sergey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 19:02:59 by kpsylock          #+#    #+#             */
-/*   Updated: 2019/11/14 19:03:00 by kpsylock         ###   ########.fr       */
+/*   Updated: 2021/09/02 19:27:39 by sergey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int				read_comments(t_data *data, char **str)
 
 	comm = 0;
 	get_input(*str, data);
-	if (str[1] != '\0')
+	if (str[1] != 0)
 	{
 		if (ft_strequ(&((*str)[2]), "start"))
 			comm = 1;
